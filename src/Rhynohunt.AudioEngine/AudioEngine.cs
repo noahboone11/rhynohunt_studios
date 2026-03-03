@@ -126,6 +126,16 @@ public class AudioEngine : IDisposable
     }
 
     /// <summary>
+    /// Sets the playback position to the specified sample offset (per channel).
+    /// Safe to call while playing or paused.
+    /// </summary>
+    /// <param name="samplePosition">The sample position to seek to (per channel).</param>
+    public void Seek(int samplePosition)
+    {
+        _position = samplePosition;
+    }
+
+    /// <summary>
     /// Releases the PortAudio stream if it is open.
     /// Note: does not call <c>PortAudio.Terminate()</c> — callers should ensure
     /// <see cref="Stop"/> or <see cref="Pause"/> is called before disposing to avoid resource leaks.
