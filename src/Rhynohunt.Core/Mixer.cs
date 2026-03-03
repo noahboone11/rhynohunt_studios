@@ -21,19 +21,19 @@ public class Mixer
     public void RemoveTrack(Track track) => _tracks.Remove(track);
 
     /// <summary>
-    /// Returns the sample rate of the first track that has a clip loaded.
-    /// Falls back to 44100 Hz if no tracks have a clip loaded.
+    /// Returns the sample rate of the first clip found across all tracks.
+    /// Falls back to 44100 Hz if no tracks have any clips loaded.
     /// </summary>
     /// <returns>The sample rate in Hz to use for playback.</returns>
     public int GetSampleRate() =>
-        _tracks.FirstOrDefault(t => t.Clip != null)?.Clip?.SampleRate ?? 44100;
+        _tracks.SelectMany(t => t.Clips).FirstOrDefault()?.SampleRate ?? 44100;
 
     /// <summary>
     /// Renders all active tracks into the provided stereo interleaved output buffer.
-    /// Respects each track's gain, pan, mute, and solo settings.
+    /// Respects each clip's <see cref="AudioClip.StartTime"/> and each track's gain, pan, mute, and solo settings.
     /// Output samples are clamped to [-1.0, 1.0] to prevent clipping.
     /// </summary>
-    /// <param name="position">The current playback position in samples (per channel).</param>
+    /// <param name="position">The current playback position in frames (samples per channel).</param>
     /// <param name="buffer">
     /// The stereo interleaved float output buffer to fill, with layout [L0, R0, L1, R1, ...].
     /// Must have at least <paramref name="frameCount"/> * 2 elements.
@@ -41,45 +41,50 @@ public class Mixer
     /// <param name="frameCount">The number of frames (sample pairs) to render.</param>
     public void Render(int position, float[] buffer, int frameCount)
     {
-        // Clear buffer first
         Array.Clear(buffer, 0, frameCount * 2);
 
         bool anySolo = _tracks.Any(t => t.IsSolo);
 
         foreach (Track track in _tracks)
         {
-            if (track.Clip == null) continue;
+            if (!track.Clips.Any()) continue;
             if (track.IsMuted) continue;
             if (anySolo && !track.IsSolo) continue;
 
-            float[] samples = track.Clip.Samples;
-            int channels = track.Clip.Channels;
-
-            // Pan law - constant power panning
             float panLeft  = (float)Math.Cos((track.Pan + 1) * Math.PI / 4);
             float panRight = (float)Math.Sin((track.Pan + 1) * Math.PI / 4);
 
-            for (int i = 0; i < frameCount; i++)
+            foreach (AudioClip clip in track.Clips)
             {
-                int sampleIndex = (position + i) * channels;
-                if (sampleIndex >= samples.Length) break;
+                // Convert StartTime to a frame offset for this clip
+                int clipStartFrame = (int)(clip.StartTime.TotalSeconds * clip.SampleRate);
+                float[] samples = clip.Samples;
+                int channels = clip.Channels;
 
-                float left, right;
-
-                if (channels == 2)
+                for (int i = 0; i < frameCount; i++)
                 {
-                    left  = samples[sampleIndex] * track.Gain;
-                    right = samples[sampleIndex + 1] * track.Gain;
-                }
-                else
-                {
-                    // Mono - duplicate to both channels
-                    left  = samples[sampleIndex] * track.Gain;
-                    right = left;
-                }
+                    int localFrame = (position + i) - clipStartFrame;
+                    if (localFrame < 0) continue;   // clip has not started yet
 
-                buffer[i * 2]     += left  * panLeft;
-                buffer[i * 2 + 1] += right * panRight;
+                    int sampleIndex = localFrame * channels;
+                    if (sampleIndex >= samples.Length) break;  // clip is exhausted
+
+                    float left, right;
+                    if (channels == 2)
+                    {
+                        left  = samples[sampleIndex]     * track.Gain;
+                        right = samples[sampleIndex + 1] * track.Gain;
+                    }
+                    else
+                    {
+                        // Mono — duplicate to both channels
+                        left  = samples[sampleIndex] * track.Gain;
+                        right = left;
+                    }
+
+                    buffer[i * 2]     += left  * panLeft;
+                    buffer[i * 2 + 1] += right * panRight;
+                }
             }
         }
 

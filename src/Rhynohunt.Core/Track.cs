@@ -1,16 +1,18 @@
 namespace Rhynohunt.Core;
 
 /// <summary>
-/// Represents a single audio track in the mixer, holding an optional <see cref="AudioClip"/>
-/// along with per-track gain, pan, mute, and solo settings.
+/// Represents a single audio track in the mixer, holding a collection of <see cref="AudioClip"/>
+/// objects placed at specific timeline positions, along with per-track gain, pan, mute, and solo settings.
 /// </summary>
 public class Track
 {
+    private readonly List<AudioClip> _clips = new List<AudioClip>();
+
     /// <summary>Gets or sets the display name of this track.</summary>
     public string Name { get; set; }
 
-    /// <summary>Gets the audio clip currently loaded on this track, or <c>null</c> if no clip is loaded.</summary>
-    public AudioClip? Clip { get; private set; }
+    /// <summary>Gets the read-only ordered list of clips on this track.</summary>
+    public IReadOnlyList<AudioClip> Clips => _clips;
 
     /// <summary>
     /// Gets or sets the gain (volume multiplier) for this track.
@@ -33,26 +35,29 @@ public class Track
     /// </summary>
     public bool IsSolo { get; set; } = false;
 
-    /// <summary>Initializes a new <see cref="Track"/> with the given name and no clip loaded.</summary>
+    /// <summary>Initializes a new <see cref="Track"/> with the given name and no clips loaded.</summary>
     /// <param name="name">The display name for this track.</param>
     public Track(string name)
     {
         Name = name;
     }
 
-    /// <summary>Loads the specified <see cref="AudioClip"/> onto this track, replacing any existing clip.</summary>
-    /// <param name="clip">The clip to load.</param>
-    public void LoadClip(AudioClip clip)
+    /// <summary>
+    /// Adds the specified <see cref="AudioClip"/> to this track at the given timeline position.
+    /// Sets <see cref="AudioClip.StartTime"/> on the clip before adding it.
+    /// </summary>
+    /// <param name="clip">The clip to add.</param>
+    /// <param name="startTime">The position on the timeline where this clip begins.</param>
+    public void AddClip(AudioClip clip, TimeSpan startTime)
     {
-        Clip = clip;
+        clip.StartTime = startTime;
+        _clips.Add(clip);
     }
 
-    /// <summary>Removes the currently loaded clip from this track.</summary>
-    public void ClearClip()
-    {
-        Clip = null;
-    }
+    /// <summary>Removes the specified <see cref="AudioClip"/> from this track.</summary>
+    /// <param name="clip">The clip to remove.</param>
+    public void RemoveClip(AudioClip clip) => _clips.Remove(clip);
 
-    /// <summary>Gets a value indicating whether this track has a clip loaded.</summary>
-    public bool HasClip => Clip != null;
+    /// <summary>Gets a value indicating whether this track has at least one clip loaded.</summary>
+    public bool HasClips => _clips.Count > 0;
 }

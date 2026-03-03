@@ -26,6 +26,12 @@ public class AudioClip
     /// <summary>Gets the total playback duration of the clip.</summary>
     public TimeSpan Duration => TimeSpan.FromSeconds((double)Samples.Length / (SampleRate * Channels));
 
+    /// <summary>
+    /// Gets or sets the position on the timeline where this clip begins playback.
+    /// Set automatically by <see cref="Track.AddClip"/>.
+    /// </summary>
+    public TimeSpan StartTime { get; set; } = TimeSpan.Zero;
+
     private AudioClip(string filePath, float[] samples, int sampleRate, int channels)
     {
         FilePath = filePath;
