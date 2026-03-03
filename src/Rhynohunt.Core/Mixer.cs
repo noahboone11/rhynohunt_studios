@@ -44,12 +44,17 @@ public class Mixer
         Array.Clear(buffer, 0, frameCount * 2);
 
         bool anySolo = _tracks.Any(t => t.IsSolo);
+        int sampleRate = GetSampleRate();
 
         foreach (Track track in _tracks)
         {
             if (!track.Clips.Any()) continue;
             if (track.IsMuted) continue;
             if (anySolo && !track.IsSolo) continue;
+
+            // Render this track's clips into a private stereo buffer so effects
+            // can be applied before the result is mixed into the master output.
+            float[] trackBuffer = new float[frameCount * 2];
 
             float panLeft  = (float)Math.Cos((track.Pan + 1) * Math.PI / 4);
             float panRight = (float)Math.Sin((track.Pan + 1) * Math.PI / 4);
@@ -82,10 +87,19 @@ public class Mixer
                         right = left;
                     }
 
-                    buffer[i * 2]     += left  * panLeft;
-                    buffer[i * 2 + 1] += right * panRight;
+                    trackBuffer[i * 2]     += left  * panLeft;
+                    trackBuffer[i * 2 + 1] += right * panRight;
                 }
             }
+
+            // Apply per-track effects (stereo interleaved) after gain and pan
+            float[] effected = trackBuffer;
+            foreach (IEffect effect in track.Effects)
+                effected = effect.Process(effected, sampleRate);
+
+            // Mix effected track into master output
+            for (int i = 0; i < effected.Length; i++)
+                buffer[i] += effected[i];
         }
 
         // Clamp to prevent clipping

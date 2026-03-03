@@ -7,12 +7,16 @@ namespace Rhynohunt.Core;
 public class Track
 {
     private readonly List<AudioClip> _clips = new List<AudioClip>();
+    private readonly List<IEffect> _effects = new List<IEffect>();
 
     /// <summary>Gets or sets the display name of this track.</summary>
     public string Name { get; set; }
 
     /// <summary>Gets the read-only ordered list of clips on this track.</summary>
     public IReadOnlyList<AudioClip> Clips => _clips;
+
+    /// <summary>Gets the read-only list of effects applied to this track during rendering.</summary>
+    public IReadOnlyList<IEffect> Effects => _effects;
 
     /// <summary>
     /// Gets or sets the gain (volume multiplier) for this track.
@@ -60,4 +64,12 @@ public class Track
 
     /// <summary>Gets a value indicating whether this track has at least one clip loaded.</summary>
     public bool HasClips => _clips.Count > 0;
+
+    /// <summary>Appends an effect to the end of this track's effect chain.</summary>
+    /// <param name="effect">The effect to add.</param>
+    public void AddEffect(IEffect effect) => _effects.Add(effect);
+
+    /// <summary>Removes an effect from this track's effect chain.</summary>
+    /// <param name="effect">The effect to remove.</param>
+    public void RemoveEffect(IEffect effect) => _effects.Remove(effect);
 }
