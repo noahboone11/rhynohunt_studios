@@ -1,0 +1,44 @@
+### YamlMime:TableOfContent
+items:
+- uid: Rhynohunt.AudioEngine
+  name: Rhynohunt.AudioEngine
+  type: Namespace
+  items:
+  - uid: Rhynohunt.AudioEngine.AudioEngine
+    name: AudioEngine
+    type: Class
+  - uid: Rhynohunt.AudioEngine.AudioTest
+    name: AudioTest
+    type: Class
+  - uid: Rhynohunt.AudioEngine.TransportController
+    name: TransportController
+    type: Class
+- uid: Rhynohunt.Core
+  name: Rhynohunt.Core
+  type: Namespace
+  items:
+  - uid: Rhynohunt.Core.AudioClip
+    name: AudioClip
+    type: Class
+  - uid: Rhynohunt.Core.AudioExporter
+    name: AudioExporter
+    type: Class
+  - uid: Rhynohunt.Core.DelayEffect
+    name: DelayEffect
+    type: Class
+  - uid: Rhynohunt.Core.GainEffect
+    name: GainEffect
+    type: Class
+  - uid: Rhynohunt.Core.IEffect
+    name: IEffect
+    type: Interface
+  - uid: Rhynohunt.Core.Mixer
+    name: Mixer
+    type: Class
+  - uid: Rhynohunt.Core.Session
+    name: Session
+    type: Class
+  - uid: Rhynohunt.Core.Track
+    name: Track
+    type: Class
+memberLayout: SamePage

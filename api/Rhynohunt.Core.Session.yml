@@ -1,0 +1,907 @@
+### YamlMime:ManagedReference
+items:
+- uid: Rhynohunt.Core.Session
+  commentId: T:Rhynohunt.Core.Session
+  id: Session
+  parent: Rhynohunt.Core
+  children:
+  - Rhynohunt.Core.Session.AddTrack(System.String)
+  - Rhynohunt.Core.Session.DisableAutoSave
+  - Rhynohunt.Core.Session.Dispose
+  - Rhynohunt.Core.Session.EnableAutoSave(System.String,System.Int32)
+  - Rhynohunt.Core.Session.Load(System.String)
+  - Rhynohunt.Core.Session.LoadClipOnTrack(Rhynohunt.Core.Track,System.String,System.TimeSpan)
+  - Rhynohunt.Core.Session.RemoveTrack(Rhynohunt.Core.Track)
+  - Rhynohunt.Core.Session.Save(System.String)
+  - Rhynohunt.Core.Session.Tracks
+  langs:
+  - csharp
+  - vb
+  name: Session
+  nameWithType: Session
+  fullName: Rhynohunt.Core.Session
+  type: Class
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Session
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 11
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: >-
+    Represents a recording session — the top-level container for a collection of
+
+    <xref href="Rhynohunt.Core.Track" data-throw-if-not-resolved="false"></xref> objects. Supports adding and removing tracks, loading clips
+
+    onto tracks, JSON-based save/load, and timed auto-save.
+
+    Implements <xref href="System.IDisposable" data-throw-if-not-resolved="false"></xref> to release the auto-save timer.
+  example: []
+  syntax:
+    content: 'public class Session : IDisposable'
+    content.vb: Public Class Session Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Rhynohunt.Core.Session.Tracks
+  commentId: P:Rhynohunt.Core.Session.Tracks
+  id: Tracks
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: Tracks
+  nameWithType: Session.Tracks
+  fullName: Rhynohunt.Core.Session.Tracks
+  type: Property
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Tracks
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 17
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: Gets the read-only list of tracks in this session.
+  example: []
+  syntax:
+    content: public IReadOnlyList<Track> Tracks { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{Rhynohunt.Core.Track}
+    content.vb: Public ReadOnly Property Tracks As IReadOnlyList(Of Track)
+  overload: Rhynohunt.Core.Session.Tracks*
+- uid: Rhynohunt.Core.Session.AddTrack(System.String)
+  commentId: M:Rhynohunt.Core.Session.AddTrack(System.String)
+  id: AddTrack(System.String)
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: AddTrack(string)
+  nameWithType: Session.AddTrack(string)
+  fullName: Rhynohunt.Core.Session.AddTrack(string)
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: AddTrack
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 25
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: >-
+    Creates a new <xref href="Rhynohunt.Core.Track" data-throw-if-not-resolved="false"></xref> with the given name, adds it to the session,
+
+    and returns it for further configuration.
+  example: []
+  syntax:
+    content: public Track AddTrack(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The display name for the new track.
+    return:
+      type: Rhynohunt.Core.Track
+      description: The newly created <xref href="Rhynohunt.Core.Track" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function AddTrack(name As String) As Track
+  overload: Rhynohunt.Core.Session.AddTrack*
+  nameWithType.vb: Session.AddTrack(String)
+  fullName.vb: Rhynohunt.Core.Session.AddTrack(String)
+  name.vb: AddTrack(String)
+- uid: Rhynohunt.Core.Session.RemoveTrack(Rhynohunt.Core.Track)
+  commentId: M:Rhynohunt.Core.Session.RemoveTrack(Rhynohunt.Core.Track)
+  id: RemoveTrack(Rhynohunt.Core.Track)
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: RemoveTrack(Track)
+  nameWithType: Session.RemoveTrack(Track)
+  fullName: Rhynohunt.Core.Session.RemoveTrack(Rhynohunt.Core.Track)
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: RemoveTrack
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 34
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: Removes the specified track from the session.
+  example: []
+  syntax:
+    content: public void RemoveTrack(Track track)
+    parameters:
+    - id: track
+      type: Rhynohunt.Core.Track
+      description: The track to remove.
+    content.vb: Public Sub RemoveTrack(track As Track)
+  overload: Rhynohunt.Core.Session.RemoveTrack*
+- uid: Rhynohunt.Core.Session.LoadClipOnTrack(Rhynohunt.Core.Track,System.String,System.TimeSpan)
+  commentId: M:Rhynohunt.Core.Session.LoadClipOnTrack(Rhynohunt.Core.Track,System.String,System.TimeSpan)
+  id: LoadClipOnTrack(Rhynohunt.Core.Track,System.String,System.TimeSpan)
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: LoadClipOnTrack(Track, string, TimeSpan)
+  nameWithType: Session.LoadClipOnTrack(Track, string, TimeSpan)
+  fullName: Rhynohunt.Core.Session.LoadClipOnTrack(Rhynohunt.Core.Track, string, System.TimeSpan)
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: LoadClipOnTrack
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 44
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: >-
+    Loads an <xref href="Rhynohunt.Core.AudioClip" data-throw-if-not-resolved="false"></xref> from the given file path and adds it to
+
+    the specified track at the given timeline position.
+  example: []
+  syntax:
+    content: public AudioClip LoadClipOnTrack(Track track, string filePath, TimeSpan startTime)
+    parameters:
+    - id: track
+      type: Rhynohunt.Core.Track
+      description: The track to add the clip to. Must belong to this session.
+    - id: filePath
+      type: System.String
+      description: The absolute or relative path to the audio file (WAV or MP3).
+    - id: startTime
+      type: System.TimeSpan
+      description: The position on the timeline where the clip begins.
+    return:
+      type: Rhynohunt.Core.AudioClip
+      description: The loaded <xref href="Rhynohunt.Core.AudioClip" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function LoadClipOnTrack(track As Track, filePath As String, startTime As TimeSpan) As AudioClip
+  overload: Rhynohunt.Core.Session.LoadClipOnTrack*
+  nameWithType.vb: Session.LoadClipOnTrack(Track, String, TimeSpan)
+  fullName.vb: Rhynohunt.Core.Session.LoadClipOnTrack(Rhynohunt.Core.Track, String, System.TimeSpan)
+  name.vb: LoadClipOnTrack(Track, String, TimeSpan)
+- uid: Rhynohunt.Core.Session.Save(System.String)
+  commentId: M:Rhynohunt.Core.Session.Save(System.String)
+  id: Save(System.String)
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: Save(string)
+  nameWithType: Session.Save(string)
+  fullName: Rhynohunt.Core.Session.Save(string)
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Save
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 56
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: >-
+    Serializes the session to a JSON file at the specified path.
+
+    Clip audio data is not stored — only file paths and timeline positions are saved.
+  example: []
+  syntax:
+    content: public void Save(string filePath)
+    parameters:
+    - id: filePath
+      type: System.String
+      description: The destination file path for the saved session JSON.
+    content.vb: Public Sub Save(filePath As String)
+  overload: Rhynohunt.Core.Session.Save*
+  nameWithType.vb: Session.Save(String)
+  fullName.vb: Rhynohunt.Core.Session.Save(String)
+  name.vb: Save(String)
+- uid: Rhynohunt.Core.Session.Load(System.String)
+  commentId: M:Rhynohunt.Core.Session.Load(System.String)
+  id: Load(System.String)
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: Load(string)
+  nameWithType: Session.Load(string)
+  fullName: Rhynohunt.Core.Session.Load(string)
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Load
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 84
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: Deserializes a session from a JSON file, reloading all audio clips from their stored paths.
+  example: []
+  syntax:
+    content: public static Session Load(string filePath)
+    parameters:
+    - id: filePath
+      type: System.String
+      description: The path to the session JSON file produced by <xref href="Rhynohunt.Core.Session.Save(System.String)" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: Rhynohunt.Core.Session
+      description: A fully reconstructed <xref href="Rhynohunt.Core.Session" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Shared Function Load(filePath As String) As Session
+  overload: Rhynohunt.Core.Session.Load*
+  nameWithType.vb: Session.Load(String)
+  fullName.vb: Rhynohunt.Core.Session.Load(String)
+  name.vb: Load(String)
+- uid: Rhynohunt.Core.Session.EnableAutoSave(System.String,System.Int32)
+  commentId: M:Rhynohunt.Core.Session.EnableAutoSave(System.String,System.Int32)
+  id: EnableAutoSave(System.String,System.Int32)
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: EnableAutoSave(string, int)
+  nameWithType: Session.EnableAutoSave(string, int)
+  fullName: Rhynohunt.Core.Session.EnableAutoSave(string, int)
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: EnableAutoSave
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 116
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: >-
+    Starts a background timer that automatically saves the session to the specified file
+
+    every <code class="paramref">intervalMinutes</code> minutes, replacing any existing auto-save timer.
+  example: []
+  syntax:
+    content: public void EnableAutoSave(string filePath, int intervalMinutes)
+    parameters:
+    - id: filePath
+      type: System.String
+      description: The file path to auto-save to.
+    - id: intervalMinutes
+      type: System.Int32
+      description: How often to save, in minutes.
+    content.vb: Public Sub EnableAutoSave(filePath As String, intervalMinutes As Integer)
+  overload: Rhynohunt.Core.Session.EnableAutoSave*
+  nameWithType.vb: Session.EnableAutoSave(String, Integer)
+  fullName.vb: Rhynohunt.Core.Session.EnableAutoSave(String, Integer)
+  name.vb: EnableAutoSave(String, Integer)
+- uid: Rhynohunt.Core.Session.DisableAutoSave
+  commentId: M:Rhynohunt.Core.Session.DisableAutoSave
+  id: DisableAutoSave
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: DisableAutoSave()
+  nameWithType: Session.DisableAutoSave()
+  fullName: Rhynohunt.Core.Session.DisableAutoSave()
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: DisableAutoSave
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 127
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: Stops and removes the auto-save timer if one is active.
+  example: []
+  syntax:
+    content: public void DisableAutoSave()
+    content.vb: Public Sub DisableAutoSave()
+  overload: Rhynohunt.Core.Session.DisableAutoSave*
+- uid: Rhynohunt.Core.Session.Dispose
+  commentId: M:Rhynohunt.Core.Session.Dispose
+  id: Dispose
+  parent: Rhynohunt.Core.Session
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: Session.Dispose()
+  fullName: Rhynohunt.Core.Session.Dispose()
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.Core/Session.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Dispose
+    path: src/Rhynohunt.Core/Session.cs
+    startLine: 135
+  assemblies:
+  - Rhynohunt.Core
+  namespace: Rhynohunt.Core
+  summary: Stops the auto-save timer and releases its resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Rhynohunt.Core.Session.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: Rhynohunt.Core.Track
+  commentId: T:Rhynohunt.Core.Track
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.Track.html
+  name: Track
+  nameWithType: Track
+  fullName: Rhynohunt.Core.Track
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Rhynohunt.Core
+  commentId: N:Rhynohunt.Core
+  href: Rhynohunt.html
+  name: Rhynohunt.Core
+  nameWithType: Rhynohunt.Core
+  fullName: Rhynohunt.Core
+  spec.csharp:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.Core
+    name: Core
+    href: Rhynohunt.Core.html
+  spec.vb:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.Core
+    name: Core
+    href: Rhynohunt.Core.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Rhynohunt.Core.Session.Tracks*
+  commentId: Overload:Rhynohunt.Core.Session.Tracks
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_Tracks
+  name: Tracks
+  nameWithType: Session.Tracks
+  fullName: Rhynohunt.Core.Session.Tracks
+- uid: System.Collections.Generic.IReadOnlyList{Rhynohunt.Core.Track}
+  commentId: T:System.Collections.Generic.IReadOnlyList{Rhynohunt.Core.Track}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<Track>
+  nameWithType: IReadOnlyList<Track>
+  fullName: System.Collections.Generic.IReadOnlyList<Rhynohunt.Core.Track>
+  nameWithType.vb: IReadOnlyList(Of Track)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Rhynohunt.Core.Track)
+  name.vb: IReadOnlyList(Of Track)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: Rhynohunt.Core.Track
+    name: Track
+    href: Rhynohunt.Core.Track.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Rhynohunt.Core.Track
+    name: Track
+    href: Rhynohunt.Core.Track.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Rhynohunt.Core.Session.AddTrack*
+  commentId: Overload:Rhynohunt.Core.Session.AddTrack
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_AddTrack_System_String_
+  name: AddTrack
+  nameWithType: Session.AddTrack
+  fullName: Rhynohunt.Core.Session.AddTrack
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Rhynohunt.Core.Session.RemoveTrack*
+  commentId: Overload:Rhynohunt.Core.Session.RemoveTrack
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_RemoveTrack_Rhynohunt_Core_Track_
+  name: RemoveTrack
+  nameWithType: Session.RemoveTrack
+  fullName: Rhynohunt.Core.Session.RemoveTrack
+- uid: Rhynohunt.Core.AudioClip
+  commentId: T:Rhynohunt.Core.AudioClip
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.AudioClip.html
+  name: AudioClip
+  nameWithType: AudioClip
+  fullName: Rhynohunt.Core.AudioClip
+- uid: Rhynohunt.Core.Session.LoadClipOnTrack*
+  commentId: Overload:Rhynohunt.Core.Session.LoadClipOnTrack
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_LoadClipOnTrack_Rhynohunt_Core_Track_System_String_System_TimeSpan_
+  name: LoadClipOnTrack
+  nameWithType: Session.LoadClipOnTrack
+  fullName: Rhynohunt.Core.Session.LoadClipOnTrack
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Rhynohunt.Core.Session.Save*
+  commentId: Overload:Rhynohunt.Core.Session.Save
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_Save_System_String_
+  name: Save
+  nameWithType: Session.Save
+  fullName: Rhynohunt.Core.Session.Save
+- uid: Rhynohunt.Core.Session.Save(System.String)
+  commentId: M:Rhynohunt.Core.Session.Save(System.String)
+  isExternal: true
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_Save_System_String_
+  name: Save(string)
+  nameWithType: Session.Save(string)
+  fullName: Rhynohunt.Core.Session.Save(string)
+  nameWithType.vb: Session.Save(String)
+  fullName.vb: Rhynohunt.Core.Session.Save(String)
+  name.vb: Save(String)
+  spec.csharp:
+  - uid: Rhynohunt.Core.Session.Save(System.String)
+    name: Save
+    href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_Save_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Rhynohunt.Core.Session.Save(System.String)
+    name: Save
+    href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_Save_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Rhynohunt.Core.Session
+  commentId: T:Rhynohunt.Core.Session
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: Rhynohunt.Core.Session
+- uid: Rhynohunt.Core.Session.Load*
+  commentId: Overload:Rhynohunt.Core.Session.Load
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_Load_System_String_
+  name: Load
+  nameWithType: Session.Load
+  fullName: Rhynohunt.Core.Session.Load
+- uid: Rhynohunt.Core.Session.EnableAutoSave*
+  commentId: Overload:Rhynohunt.Core.Session.EnableAutoSave
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_EnableAutoSave_System_String_System_Int32_
+  name: EnableAutoSave
+  nameWithType: Session.EnableAutoSave
+  fullName: Rhynohunt.Core.Session.EnableAutoSave
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Rhynohunt.Core.Session.DisableAutoSave*
+  commentId: Overload:Rhynohunt.Core.Session.DisableAutoSave
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_DisableAutoSave
+  name: DisableAutoSave
+  nameWithType: Session.DisableAutoSave
+  fullName: Rhynohunt.Core.Session.DisableAutoSave
+- uid: Rhynohunt.Core.Session.Dispose*
+  commentId: Overload:Rhynohunt.Core.Session.Dispose
+  href: Rhynohunt.Core.Session.html#Rhynohunt_Core_Session_Dispose
+  name: Dispose
+  nameWithType: Session.Dispose
+  fullName: Rhynohunt.Core.Session.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
