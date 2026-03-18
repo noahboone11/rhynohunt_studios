@@ -1,0 +1,915 @@
+### YamlMime:ManagedReference
+items:
+- uid: Rhynohunt.AudioEngine.TransportController
+  commentId: T:Rhynohunt.AudioEngine.TransportController
+  id: TransportController
+  parent: Rhynohunt.AudioEngine
+  children:
+  - Rhynohunt.AudioEngine.TransportController.#ctor(System.Int32)
+  - Rhynohunt.AudioEngine.TransportController.CurrentTime
+  - Rhynohunt.AudioEngine.TransportController.Dispose
+  - Rhynohunt.AudioEngine.TransportController.IsPlaying
+  - Rhynohunt.AudioEngine.TransportController.Mixer
+  - Rhynohunt.AudioEngine.TransportController.Pause
+  - Rhynohunt.AudioEngine.TransportController.Play
+  - Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged
+  - Rhynohunt.AudioEngine.TransportController.Seek(System.TimeSpan)
+  - Rhynohunt.AudioEngine.TransportController.Stop
+  - Rhynohunt.AudioEngine.TransportController.TimeChanged
+  - Rhynohunt.AudioEngine.TransportController.TotalTime
+  langs:
+  - csharp
+  - vb
+  name: TransportController
+  nameWithType: TransportController
+  fullName: Rhynohunt.AudioEngine.TransportController
+  type: Class
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: TransportController
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 10
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    High-level playback controller that owns a <xref href="Rhynohunt.Core.Mixer" data-throw-if-not-resolved="false"></xref> and an <xref href="Rhynohunt.AudioEngine.AudioEngine" data-throw-if-not-resolved="false"></xref>.
+
+    Provides transport controls (play, pause, stop, seek), exposes timeline properties, and fires
+
+    events for UI or other subscribers to react to state and time changes.
+
+    Implements <xref href="System.IDisposable" data-throw-if-not-resolved="false"></xref> to release underlying resources.
+  example: []
+  syntax:
+    content: 'public class TransportController : IDisposable'
+    content.vb: Public Class TransportController Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Rhynohunt.AudioEngine.TransportController.Mixer
+  commentId: P:Rhynohunt.AudioEngine.TransportController.Mixer
+  id: Mixer
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: Mixer
+  nameWithType: TransportController.Mixer
+  fullName: Rhynohunt.AudioEngine.TransportController.Mixer
+  type: Property
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Mixer
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 17
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: Gets the <xref href="Rhynohunt.Core.Mixer" data-throw-if-not-resolved="false"></xref> managed by this controller. Add tracks here to configure playback.
+  example: []
+  syntax:
+    content: public Mixer Mixer { get; }
+    parameters: []
+    return:
+      type: Rhynohunt.Core.Mixer
+    content.vb: Public ReadOnly Property Mixer As Mixer
+  overload: Rhynohunt.AudioEngine.TransportController.Mixer*
+- uid: Rhynohunt.AudioEngine.TransportController.IsPlaying
+  commentId: P:Rhynohunt.AudioEngine.TransportController.IsPlaying
+  id: IsPlaying
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: IsPlaying
+  nameWithType: TransportController.IsPlaying
+  fullName: Rhynohunt.AudioEngine.TransportController.IsPlaying
+  type: Property
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: IsPlaying
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 20
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: Gets a value indicating whether the transport is currently playing.
+  example: []
+  syntax:
+    content: public bool IsPlaying { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsPlaying As Boolean
+  overload: Rhynohunt.AudioEngine.TransportController.IsPlaying*
+- uid: Rhynohunt.AudioEngine.TransportController.CurrentTime
+  commentId: P:Rhynohunt.AudioEngine.TransportController.CurrentTime
+  id: CurrentTime
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: CurrentTime
+  nameWithType: TransportController.CurrentTime
+  fullName: Rhynohunt.AudioEngine.TransportController.CurrentTime
+  type: Property
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: CurrentTime
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 23
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: Gets the current playback position as a <xref href="System.TimeSpan" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public TimeSpan CurrentTime { get; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+    content.vb: Public ReadOnly Property CurrentTime As TimeSpan
+  overload: Rhynohunt.AudioEngine.TransportController.CurrentTime*
+- uid: Rhynohunt.AudioEngine.TransportController.TotalTime
+  commentId: P:Rhynohunt.AudioEngine.TransportController.TotalTime
+  id: TotalTime
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: TotalTime
+  nameWithType: TransportController.TotalTime
+  fullName: Rhynohunt.AudioEngine.TransportController.TotalTime
+  type: Property
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: TotalTime
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 30
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    Gets the total duration of the session — the end time of the last clip across all tracks.
+
+    Returns <xref href="System.TimeSpan.Zero" data-throw-if-not-resolved="false"></xref> if no clips are loaded.
+  example: []
+  syntax:
+    content: public TimeSpan TotalTime { get; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+    content.vb: Public ReadOnly Property TotalTime As TimeSpan
+  overload: Rhynohunt.AudioEngine.TransportController.TotalTime*
+- uid: Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged
+  commentId: E:Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged
+  id: PlaybackStateChanged
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: PlaybackStateChanged
+  nameWithType: TransportController.PlaybackStateChanged
+  fullName: Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged
+  type: Event
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: PlaybackStateChanged
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 41
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    Fired whenever the playback state changes (play started, paused, or stopped).
+
+    Subscribers are invoked on a thread-pool thread.
+  example: []
+  syntax:
+    content: public event Action? PlaybackStateChanged
+    return:
+      type: System.Action
+    content.vb: Public Event PlaybackStateChanged As Action
+- uid: Rhynohunt.AudioEngine.TransportController.TimeChanged
+  commentId: E:Rhynohunt.AudioEngine.TransportController.TimeChanged
+  id: TimeChanged
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: TimeChanged
+  nameWithType: TransportController.TimeChanged
+  fullName: Rhynohunt.AudioEngine.TransportController.TimeChanged
+  type: Event
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: TimeChanged
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 48
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    Fired every 100 ms while the transport is playing, to notify subscribers of the updated
+
+    <xref href="Rhynohunt.AudioEngine.TransportController.CurrentTime" data-throw-if-not-resolved="false"></xref>. Raised by an internal <xref href="System.Timers.Timer" data-throw-if-not-resolved="false"></xref> —
+
+    not from the audio callback.
+  example: []
+  syntax:
+    content: public event Action? TimeChanged
+    return:
+      type: System.Action
+    content.vb: Public Event TimeChanged As Action
+- uid: Rhynohunt.AudioEngine.TransportController.#ctor(System.Int32)
+  commentId: M:Rhynohunt.AudioEngine.TransportController.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: TransportController(int)
+  nameWithType: TransportController.TransportController(int)
+  fullName: Rhynohunt.AudioEngine.TransportController.TransportController(int)
+  type: Constructor
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: .ctor
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 54
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: Initializes a new <xref href="Rhynohunt.AudioEngine.TransportController" data-throw-if-not-resolved="false"></xref> for the specified PortAudio output device.
+  example: []
+  syntax:
+    content: public TransportController(int outputDevice)
+    parameters:
+    - id: outputDevice
+      type: System.Int32
+      description: The PortAudio device index to use for output.
+    content.vb: Public Sub New(outputDevice As Integer)
+  overload: Rhynohunt.AudioEngine.TransportController.#ctor*
+  nameWithType.vb: TransportController.New(Integer)
+  fullName.vb: Rhynohunt.AudioEngine.TransportController.New(Integer)
+  name.vb: New(Integer)
+- uid: Rhynohunt.AudioEngine.TransportController.Play
+  commentId: M:Rhynohunt.AudioEngine.TransportController.Play
+  id: Play
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: Play()
+  nameWithType: TransportController.Play()
+  fullName: Rhynohunt.AudioEngine.TransportController.Play()
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Play
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 68
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    Starts playback from the current position. Does nothing if already playing.
+
+    Fires <xref href="Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged" data-throw-if-not-resolved="false"></xref> after starting.
+  example: []
+  syntax:
+    content: public void Play()
+    content.vb: Public Sub Play()
+  overload: Rhynohunt.AudioEngine.TransportController.Play*
+- uid: Rhynohunt.AudioEngine.TransportController.Pause
+  commentId: M:Rhynohunt.AudioEngine.TransportController.Pause
+  id: Pause
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: Pause()
+  nameWithType: TransportController.Pause()
+  fullName: Rhynohunt.AudioEngine.TransportController.Pause()
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Pause
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 81
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    Pauses playback, preserving the current position for resumption.
+
+    Does nothing if not currently playing.
+
+    Fires <xref href="Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged" data-throw-if-not-resolved="false"></xref> after pausing.
+  example: []
+  syntax:
+    content: public void Pause()
+    content.vb: Public Sub Pause()
+  overload: Rhynohunt.AudioEngine.TransportController.Pause*
+- uid: Rhynohunt.AudioEngine.TransportController.Stop
+  commentId: M:Rhynohunt.AudioEngine.TransportController.Stop
+  id: Stop
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: Stop()
+  nameWithType: TransportController.Stop()
+  fullName: Rhynohunt.AudioEngine.TransportController.Stop()
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Stop
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 93
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    Stops playback and resets the position to 0.
+
+    Fires <xref href="Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged" data-throw-if-not-resolved="false"></xref> and <xref href="Rhynohunt.AudioEngine.TransportController.TimeChanged" data-throw-if-not-resolved="false"></xref> after stopping.
+  example: []
+  syntax:
+    content: public void Stop()
+    content.vb: Public Sub [Stop]()
+  overload: Rhynohunt.AudioEngine.TransportController.Stop*
+- uid: Rhynohunt.AudioEngine.TransportController.Seek(System.TimeSpan)
+  commentId: M:Rhynohunt.AudioEngine.TransportController.Seek(System.TimeSpan)
+  id: Seek(System.TimeSpan)
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: Seek(TimeSpan)
+  nameWithType: TransportController.Seek(TimeSpan)
+  fullName: Rhynohunt.AudioEngine.TransportController.Seek(System.TimeSpan)
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Seek
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 107
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: >-
+    Seeks the playback position to the specified time.
+
+    Safe to call while playing or paused.
+
+    Fires <xref href="Rhynohunt.AudioEngine.TransportController.TimeChanged" data-throw-if-not-resolved="false"></xref> after seeking.
+  example: []
+  syntax:
+    content: public void Seek(TimeSpan position)
+    parameters:
+    - id: position
+      type: System.TimeSpan
+      description: The timeline position to seek to.
+    content.vb: Public Sub Seek(position As TimeSpan)
+  overload: Rhynohunt.AudioEngine.TransportController.Seek*
+- uid: Rhynohunt.AudioEngine.TransportController.Dispose
+  commentId: M:Rhynohunt.AudioEngine.TransportController.Dispose
+  id: Dispose
+  parent: Rhynohunt.AudioEngine.TransportController
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: TransportController.Dispose()
+  fullName: Rhynohunt.AudioEngine.TransportController.Dispose()
+  type: Method
+  source:
+    remote:
+      path: src/Rhynohunt.AudioEngine/TransportController.cs
+      branch: main
+      repo: git@github.com:noahboone11/rhynohunt_studios.git
+    id: Dispose
+    path: src/Rhynohunt.AudioEngine/TransportController.cs
+    startLine: 122
+  assemblies:
+  - Rhynohunt.AudioEngine
+  namespace: Rhynohunt.AudioEngine
+  summary: Releases the underlying <xref href="Rhynohunt.AudioEngine.AudioEngine" data-throw-if-not-resolved="false"></xref> and stops the internal timer.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Rhynohunt.AudioEngine.TransportController.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: Rhynohunt.Core.Mixer
+  commentId: T:Rhynohunt.Core.Mixer
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.Mixer.html
+  name: Mixer
+  nameWithType: Mixer
+  fullName: Rhynohunt.Core.Mixer
+- uid: Rhynohunt.AudioEngine.AudioEngine
+  commentId: T:Rhynohunt.AudioEngine.AudioEngine
+  href: Rhynohunt.AudioEngine.AudioEngine.html
+  name: AudioEngine
+  nameWithType: AudioEngine
+  fullName: Rhynohunt.AudioEngine.AudioEngine
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Rhynohunt.AudioEngine
+  commentId: N:Rhynohunt.AudioEngine
+  href: Rhynohunt.html
+  name: Rhynohunt.AudioEngine
+  nameWithType: Rhynohunt.AudioEngine
+  fullName: Rhynohunt.AudioEngine
+  spec.csharp:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.AudioEngine
+    name: AudioEngine
+    href: Rhynohunt.AudioEngine.html
+  spec.vb:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.AudioEngine
+    name: AudioEngine
+    href: Rhynohunt.AudioEngine.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Rhynohunt.Core
+  commentId: N:Rhynohunt.Core
+  href: Rhynohunt.html
+  name: Rhynohunt.Core
+  nameWithType: Rhynohunt.Core
+  fullName: Rhynohunt.Core
+  spec.csharp:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.Core
+    name: Core
+    href: Rhynohunt.Core.html
+  spec.vb:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.Core
+    name: Core
+    href: Rhynohunt.Core.html
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Rhynohunt.AudioEngine.TransportController.Mixer*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.Mixer
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_Mixer
+  name: Mixer
+  nameWithType: TransportController.Mixer
+  fullName: Rhynohunt.AudioEngine.TransportController.Mixer
+- uid: Rhynohunt.AudioEngine.TransportController.IsPlaying*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.IsPlaying
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_IsPlaying
+  name: IsPlaying
+  nameWithType: TransportController.IsPlaying
+  fullName: Rhynohunt.AudioEngine.TransportController.IsPlaying
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.timespan
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Rhynohunt.AudioEngine.TransportController.CurrentTime*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.CurrentTime
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_CurrentTime
+  name: CurrentTime
+  nameWithType: TransportController.CurrentTime
+  fullName: Rhynohunt.AudioEngine.TransportController.CurrentTime
+- uid: System.TimeSpan.Zero
+  commentId: F:System.TimeSpan.Zero
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.timespan.zero
+  name: Zero
+  nameWithType: TimeSpan.Zero
+  fullName: System.TimeSpan.Zero
+- uid: Rhynohunt.AudioEngine.TransportController.TotalTime*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.TotalTime
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_TotalTime
+  name: TotalTime
+  nameWithType: TransportController.TotalTime
+  fullName: Rhynohunt.AudioEngine.TransportController.TotalTime
+- uid: System.Action
+  commentId: T:System.Action
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action
+  name: Action
+  nameWithType: Action
+  fullName: System.Action
+- uid: Rhynohunt.AudioEngine.TransportController.CurrentTime
+  commentId: P:Rhynohunt.AudioEngine.TransportController.CurrentTime
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_CurrentTime
+  name: CurrentTime
+  nameWithType: TransportController.CurrentTime
+  fullName: Rhynohunt.AudioEngine.TransportController.CurrentTime
+- uid: System.Timers.Timer
+  commentId: T:System.Timers.Timer
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.timers.timer
+  name: Timer
+  nameWithType: Timer
+  fullName: System.Timers.Timer
+- uid: Rhynohunt.AudioEngine.TransportController
+  commentId: T:Rhynohunt.AudioEngine.TransportController
+  href: Rhynohunt.AudioEngine.TransportController.html
+  name: TransportController
+  nameWithType: TransportController
+  fullName: Rhynohunt.AudioEngine.TransportController
+- uid: Rhynohunt.AudioEngine.TransportController.#ctor*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.#ctor
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController__ctor_System_Int32_
+  name: TransportController
+  nameWithType: TransportController.TransportController
+  fullName: Rhynohunt.AudioEngine.TransportController.TransportController
+  nameWithType.vb: TransportController.New
+  fullName.vb: Rhynohunt.AudioEngine.TransportController.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged
+  commentId: E:Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_PlaybackStateChanged
+  name: PlaybackStateChanged
+  nameWithType: TransportController.PlaybackStateChanged
+  fullName: Rhynohunt.AudioEngine.TransportController.PlaybackStateChanged
+- uid: Rhynohunt.AudioEngine.TransportController.Play*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.Play
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_Play
+  name: Play
+  nameWithType: TransportController.Play
+  fullName: Rhynohunt.AudioEngine.TransportController.Play
+- uid: Rhynohunt.AudioEngine.TransportController.Pause*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.Pause
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_Pause
+  name: Pause
+  nameWithType: TransportController.Pause
+  fullName: Rhynohunt.AudioEngine.TransportController.Pause
+- uid: Rhynohunt.AudioEngine.TransportController.TimeChanged
+  commentId: E:Rhynohunt.AudioEngine.TransportController.TimeChanged
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_TimeChanged
+  name: TimeChanged
+  nameWithType: TransportController.TimeChanged
+  fullName: Rhynohunt.AudioEngine.TransportController.TimeChanged
+- uid: Rhynohunt.AudioEngine.TransportController.Stop*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.Stop
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_Stop
+  name: Stop
+  nameWithType: TransportController.Stop
+  fullName: Rhynohunt.AudioEngine.TransportController.Stop
+- uid: Rhynohunt.AudioEngine.TransportController.Seek*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.Seek
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_Seek_System_TimeSpan_
+  name: Seek
+  nameWithType: TransportController.Seek
+  fullName: Rhynohunt.AudioEngine.TransportController.Seek
+- uid: Rhynohunt.AudioEngine.TransportController.Dispose*
+  commentId: Overload:Rhynohunt.AudioEngine.TransportController.Dispose
+  href: Rhynohunt.AudioEngine.TransportController.html#Rhynohunt_AudioEngine_TransportController_Dispose
+  name: Dispose
+  nameWithType: TransportController.Dispose
+  fullName: Rhynohunt.AudioEngine.TransportController.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

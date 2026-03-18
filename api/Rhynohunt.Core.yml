@@ -1,0 +1,99 @@
+### YamlMime:ManagedReference
+items:
+- uid: Rhynohunt.Core
+  commentId: N:Rhynohunt.Core
+  id: Rhynohunt.Core
+  children:
+  - Rhynohunt.Core.AudioClip
+  - Rhynohunt.Core.AudioExporter
+  - Rhynohunt.Core.DelayEffect
+  - Rhynohunt.Core.GainEffect
+  - Rhynohunt.Core.IEffect
+  - Rhynohunt.Core.Mixer
+  - Rhynohunt.Core.Session
+  - Rhynohunt.Core.Track
+  langs:
+  - csharp
+  - vb
+  name: Rhynohunt.Core
+  nameWithType: Rhynohunt.Core
+  fullName: Rhynohunt.Core
+  type: Namespace
+  assemblies:
+  - Rhynohunt.Core
+references:
+- uid: Rhynohunt.Core.AudioClip
+  commentId: T:Rhynohunt.Core.AudioClip
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.AudioClip.html
+  name: AudioClip
+  nameWithType: AudioClip
+  fullName: Rhynohunt.Core.AudioClip
+- uid: Rhynohunt.Core.AudioExporter
+  commentId: T:Rhynohunt.Core.AudioExporter
+  href: Rhynohunt.Core.AudioExporter.html
+  name: AudioExporter
+  nameWithType: AudioExporter
+  fullName: Rhynohunt.Core.AudioExporter
+- uid: Rhynohunt.Core.DelayEffect
+  commentId: T:Rhynohunt.Core.DelayEffect
+  href: Rhynohunt.Core.DelayEffect.html
+  name: DelayEffect
+  nameWithType: DelayEffect
+  fullName: Rhynohunt.Core.DelayEffect
+- uid: Rhynohunt.Core.GainEffect
+  commentId: T:Rhynohunt.Core.GainEffect
+  href: Rhynohunt.Core.GainEffect.html
+  name: GainEffect
+  nameWithType: GainEffect
+  fullName: Rhynohunt.Core.GainEffect
+- uid: Rhynohunt.Core.IEffect
+  commentId: T:Rhynohunt.Core.IEffect
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.IEffect.html
+  name: IEffect
+  nameWithType: IEffect
+  fullName: Rhynohunt.Core.IEffect
+- uid: Rhynohunt.Core.Mixer
+  commentId: T:Rhynohunt.Core.Mixer
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.Mixer.html
+  name: Mixer
+  nameWithType: Mixer
+  fullName: Rhynohunt.Core.Mixer
+- uid: Rhynohunt.Core.Session
+  commentId: T:Rhynohunt.Core.Session
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: Rhynohunt.Core.Session
+- uid: Rhynohunt.Core.Track
+  commentId: T:Rhynohunt.Core.Track
+  parent: Rhynohunt.Core
+  href: Rhynohunt.Core.Track.html
+  name: Track
+  nameWithType: Track
+  fullName: Rhynohunt.Core.Track
+- uid: Rhynohunt.Core
+  commentId: N:Rhynohunt.Core
+  href: Rhynohunt.html
+  name: Rhynohunt.Core
+  nameWithType: Rhynohunt.Core
+  fullName: Rhynohunt.Core
+  spec.csharp:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.Core
+    name: Core
+    href: Rhynohunt.Core.html
+  spec.vb:
+  - uid: Rhynohunt
+    name: Rhynohunt
+    href: Rhynohunt.html
+  - name: .
+  - uid: Rhynohunt.Core
+    name: Core
+    href: Rhynohunt.Core.html
