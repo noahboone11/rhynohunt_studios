@@ -16,7 +16,7 @@
             <Grid RowDefinitions="*,Auto" Background="Black">
                 <Border Padding="10" CornerRadius="3">
                     <StackPanel Spacing="8">
-                        <Image Source="{SvgImage /Users/hunter/RiderProjects/rhynohunt_studios/src/Rhynohunt.UI/Assets/Images/rhynohunt_transparent.svg}" Width="150"></Image> 
+                        <Image Source="{SvgImage avares://Rhynohunt.UI/Assets/Images/rhynohunt_transparent.svg}" Width="150"></Image> 
                         <Button Content="Import" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ImportClicked"/>
                         <Button Content="Export" Foreground="AliceBlue" HorizontalAlignment="Stretch" ></Button>
                         <Button Content="Play" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="playclicked"></Button>
