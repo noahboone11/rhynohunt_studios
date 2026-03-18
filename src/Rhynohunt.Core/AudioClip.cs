@@ -26,6 +26,9 @@ public class AudioClip
     /// <summary>Gets the total playback duration of the clip.</summary>
     public TimeSpan Duration => TimeSpan.FromSeconds((double)Samples.Length / (SampleRate * Channels));
 
+    public float Durvisual => (float)Duration.TotalSeconds * 15;
+    public double LeftPixels => (float)StartTime.TotalSeconds * 15;
+
     /// <summary>
     /// Gets or sets the position on the timeline where this clip begins playback.
     /// Set automatically by <see cref="Track.AddClip"/>.

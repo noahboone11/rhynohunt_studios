@@ -1,0 +1,83 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Rhynohunt.UI;assembly=Rhynohunt.UI"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:Rhynohunt.Core;assembly=Rhynohunt.Core"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="600"
+        Width="1024" Height="600"
+        x:Class="Rhynohunt.UI.MainWindow"
+        x:DataType="core:Session"
+        Title="Rhynohunt.UI">
+    
+    <Grid Background= "#222222" ColumnDefinitions="Auto,80,*">
+       
+        <Border Background="Black" CornerRadius="30" Margin="10,10" ClipToBounds="True">
+            <Grid RowDefinitions="*,Auto" Background="Black">
+                <Border Padding="10" CornerRadius="3">
+                    <StackPanel Spacing="8">
+                        <Image Source="{SvgImage /Users/hunter/RiderProjects/rhynohunt_studios/src/Rhynohunt.UI/Assets/Images/rhynohunt_transparent.svg}" Width="150"></Image> 
+                        <Button Content="Import" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ImportClicked"/>
+                        <Button Content="Export" Foreground="AliceBlue" HorizontalAlignment="Stretch" ></Button>
+                        <Button Content="Play" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="playclicked"></Button>
+                        <Button Content="Stop" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="stopclicked" ></Button>
+                        <Button Content="Pause" Foreground="AliceBlue" HorizontalAlignment="Stretch"></Button>
+                        <Button Content="Load" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="LoadClicked"></Button>
+                        <Button Content="Save" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="SaveClicked"></Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border> 
+        
+        <ItemsControl Grid.Column="1" Padding="0,8,0,0" ItemsSource="{Binding _tracks}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="core:Track">
+                    <StackPanel Background="#333333" Height="51"  >
+                        <TextBlock Text="{Binding Name}" Foreground="White"/>
+                        <Button HorizontalAlignment="Center" Click="Addclip"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+       
+        <Grid Grid.Column="2" RowDefinitions="9,*">
+            <local:TimelineCanvas Grid.RowSpan="2" Background="#222222"/>
+            <Border Height="9"></Border>
+            <ItemsControl Grid.Row="1" Padding="0,0,0,0" ItemsSource="{Binding _tracks}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="core:Track">
+                        <Border Background="Transparent" Height="48" Margin="0,1">
+                            <ItemsControl ItemsSource="{Binding Clips}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.Styles>
+                                    <Style Selector="ContentPresenter">
+                                        <Setter Property="Canvas.Top" Value="15"/>
+                                    </Style>
+                                </ItemsControl.Styles>
+                                
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="core:AudioClip">
+                                        <local:MovableBorder AudioClip="{Binding}"
+                                                             Width="{Binding Durvisual}"
+                                                             Height="20"
+                                                             Background="Black"
+                                                             CornerRadius="10"
+                                                             Canvas.Top="30">
+                                        </local:MovableBorder>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        
+    </Grid>
+</Window>
+

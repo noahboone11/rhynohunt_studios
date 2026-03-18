@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhynohunt.AudioEngine", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhynohunt.TestRunner", "src\Rhynohunt.TestRunner\Rhynohunt.TestRunner.csproj", "{0C386193-3D46-4877-9F3C-35AF71E39BD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rhynohunt.UI", "src\Rhynohunt.UI\Rhynohunt.UI.csproj", "{79B4B05D-C154-4E50-8309-17149218EDC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +34,15 @@ Global
 		{0C386193-3D46-4877-9F3C-35AF71E39BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C386193-3D46-4877-9F3C-35AF71E39BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C386193-3D46-4877-9F3C-35AF71E39BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79B4B05D-C154-4E50-8309-17149218EDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79B4B05D-C154-4E50-8309-17149218EDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79B4B05D-C154-4E50-8309-17149218EDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79B4B05D-C154-4E50-8309-17149218EDC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{19D82015-2AAD-48F6-BE91-74588D80E360} = {5F708A55-7A8D-4050-84C9-09B94FE127D0}
 		{F3F45DE9-3700-42A0-AD70-AE31458878E4} = {5F708A55-7A8D-4050-84C9-09B94FE127D0}
 		{0C386193-3D46-4877-9F3C-35AF71E39BD1} = {5F708A55-7A8D-4050-84C9-09B94FE127D0}
+		{79B4B05D-C154-4E50-8309-17149218EDC0} = {5F708A55-7A8D-4050-84C9-09B94FE127D0}
 	EndGlobalSection
 EndGlobal

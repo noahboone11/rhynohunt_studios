@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Rhynohunt.Core;
+using System.Collections.ObjectModel;
 
 /// <summary>
 /// Represents a recording session — the top-level container for a collection of
@@ -11,11 +12,12 @@ namespace Rhynohunt.Core;
 /// </summary>
 public class Session : IDisposable
 {
-    private readonly List<Track> _tracks = new List<Track>();
+    // private readonly List<Track> _tracks = new List<Track>();
     private System.Timers.Timer? _autoSaveTimer;
 
     /// <summary>Gets the read-only list of tracks in this session.</summary>
-    public IReadOnlyList<Track> Tracks => _tracks;
+    // public IReadOnlyList<Track> Tracks => _tracks;
+    public ObservableCollection<Track> _tracks { get; } = new();
 
     /// <summary>
     /// Creates a new <see cref="Track"/> with the given name, adds it to the session,

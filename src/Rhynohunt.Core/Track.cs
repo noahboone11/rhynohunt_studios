@@ -1,4 +1,5 @@
 namespace Rhynohunt.Core;
+using System.Collections.ObjectModel;
 
 /// <summary>
 /// Represents a single audio track in the mixer, holding a collection of <see cref="AudioClip"/>
@@ -6,14 +7,14 @@ namespace Rhynohunt.Core;
 /// </summary>
 public class Track
 {
-    private readonly List<AudioClip> _clips = new List<AudioClip>();
+    private readonly ObservableCollection<AudioClip> _clips = new();
     private readonly List<IEffect> _effects = new List<IEffect>();
 
     /// <summary>Gets or sets the display name of this track.</summary>
     public string Name { get; set; }
 
     /// <summary>Gets the read-only ordered list of clips on this track.</summary>
-    public IReadOnlyList<AudioClip> Clips => _clips;
+    public ObservableCollection<AudioClip> Clips => _clips;
 
     /// <summary>Gets the read-only list of effects applied to this track during rendering.</summary>
     public IReadOnlyList<IEffect> Effects => _effects;

@@ -1,8 +1,8 @@
 using Rhynohunt.Core;
 using Rhynohunt.AudioEngine;
 
-const string AudioFile = "/Users/noahboone/repos/rhynohunt_studios/audio_files/ff-16b-2c-44100hz.mp3";
-
+const string AudioFile = "/Users/hunter/RiderProjects/rhynohunt_studios/audio_files/ff-16b-2c-44100hz.mp3";
+AudioTest.ListDevices();
 // ── Task 1: Multiple clips with timeline positions ────────────────────────────
 Console.WriteLine("=== Task 1: Multiple clips with timeline positions ===");
 
@@ -91,9 +91,9 @@ session.Save(sessionPath);
 Console.WriteLine($"  Saved to  : {sessionPath}");
 
 var loaded = Session.Load(sessionPath);
-Console.WriteLine($"  Loaded    : {loaded.Tracks.Count} tracks");
-Console.WriteLine($"  Track 0   : '{loaded.Tracks[0].Name}', {loaded.Tracks[0].Clips.Count} clip(s), Gain={loaded.Tracks[0].Gain}");
-Console.WriteLine($"  Track 1   : '{loaded.Tracks[1].Name}', {loaded.Tracks[1].Clips.Count} clip(s), Pan={loaded.Tracks[1].Pan}");
+Console.WriteLine($"  Loaded    : {loaded._tracks.Count} tracks");
+Console.WriteLine($"  Track 0   : '{loaded._tracks[0].Name}', {loaded._tracks[0].Clips.Count} clip(s), Gain={loaded._tracks[0].Gain}");
+Console.WriteLine($"  Track 1   : '{loaded._tracks[1].Name}', {loaded._tracks[1].Clips.Count} clip(s), Pan={loaded._tracks[1].Pan}");
 
 session.EnableAutoSave(sessionPath, intervalMinutes: 1);
 Console.WriteLine("  Auto-save enabled (1 min interval).");

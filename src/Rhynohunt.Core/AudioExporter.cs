@@ -63,12 +63,12 @@ public static class AudioExporter
     private static (Mixer mixer, int totalFrames, int sampleRate) PrepareRender(Session session)
     {
         var mixer = new Mixer();
-        foreach (var track in session.Tracks)
+        foreach (var track in session._tracks)
             mixer.AddTrack(track);
 
         int sampleRate = mixer.GetSampleRate();
 
-        TimeSpan totalTime = session.Tracks
+        TimeSpan totalTime = session._tracks
             .SelectMany(t => t.Clips)
             .Select(c => c.StartTime + c.Duration)
             .DefaultIfEmpty(TimeSpan.Zero)
