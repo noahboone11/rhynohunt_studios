@@ -4,27 +4,14 @@ using System.Text.Json.Serialization;
 namespace Rhynohunt.Core;
 using System.Collections.ObjectModel;
 
-/// <summary>
-/// Represents a recording session — the top-level container for a collection of
-/// <see cref="Track"/> objects. Supports adding and removing tracks, loading clips
-/// onto tracks, JSON-based save/load, and timed auto-save.
-/// Implements <see cref="IDisposable"/> to release the auto-save timer.
-/// </summary>
 public class Session : IDisposable
 {
     // private readonly List<Track> _tracks = new List<Track>();
     private System.Timers.Timer? _autoSaveTimer;
 
-    /// <summary>Gets the read-only list of tracks in this session.</summary>
     // public IReadOnlyList<Track> Tracks => _tracks;
     public ObservableCollection<Track> _tracks { get; } = new();
 
-    /// <summary>
-    /// Creates a new <see cref="Track"/> with the given name, adds it to the session,
-    /// and returns it for further configuration.
-    /// </summary>
-    /// <param name="name">The display name for the new track.</param>
-    /// <returns>The newly created <see cref="Track"/>.</returns>
     public Track AddTrack(string name)
     {
         var track = new Track(name);
@@ -32,18 +19,8 @@ public class Session : IDisposable
         return track;
     }
 
-    /// <summary>Removes the specified track from the session.</summary>
-    /// <param name="track">The track to remove.</param>
     public void RemoveTrack(Track track) => _tracks.Remove(track);
 
-    /// <summary>
-    /// Loads an <see cref="AudioClip"/> from the given file path and adds it to
-    /// the specified track at the given timeline position.
-    /// </summary>
-    /// <param name="track">The track to add the clip to. Must belong to this session.</param>
-    /// <param name="filePath">The absolute or relative path to the audio file (WAV or MP3).</param>
-    /// <param name="startTime">The position on the timeline where the clip begins.</param>
-    /// <returns>The loaded <see cref="AudioClip"/>.</returns>
     public AudioClip LoadClipOnTrack(Track track, string filePath, TimeSpan startTime)
     {
         var clip = AudioClip.Load(filePath);
@@ -51,11 +28,7 @@ public class Session : IDisposable
         return clip;
     }
 
-    /// <summary>
-    /// Serializes the session to a JSON file at the specified path.
-    /// Clip audio data is not stored — only file paths and timeline positions are saved.
-    /// </summary>
-    /// <param name="filePath">The destination file path for the saved session JSON.</param>
+    // Saves track layout to JSON — audio data is not stored, just file paths and positions
     public void Save(string filePath)
     {
         var data = new SessionData
@@ -79,11 +52,6 @@ public class Session : IDisposable
         File.WriteAllText(filePath, json);
     }
 
-    /// <summary>
-    /// Deserializes a session from a JSON file, reloading all audio clips from their stored paths.
-    /// </summary>
-    /// <param name="filePath">The path to the session JSON file produced by <see cref="Save"/>.</param>
-    /// <returns>A fully reconstructed <see cref="Session"/>.</returns>
     public static Session Load(string filePath)
     {
         string json = File.ReadAllText(filePath);
@@ -110,12 +78,6 @@ public class Session : IDisposable
         return session;
     }
 
-    /// <summary>
-    /// Starts a background timer that automatically saves the session to the specified file
-    /// every <paramref name="intervalMinutes"/> minutes, replacing any existing auto-save timer.
-    /// </summary>
-    /// <param name="filePath">The file path to auto-save to.</param>
-    /// <param name="intervalMinutes">How often to save, in minutes.</param>
     public void EnableAutoSave(string filePath, int intervalMinutes)
     {
         DisableAutoSave();
@@ -126,7 +88,6 @@ public class Session : IDisposable
         _autoSaveTimer.Start();
     }
 
-    /// <summary>Stops and removes the auto-save timer if one is active.</summary>
     public void DisableAutoSave()
     {
         _autoSaveTimer?.Stop();
@@ -134,7 +95,6 @@ public class Session : IDisposable
         _autoSaveTimer = null;
     }
 
-    /// <summary>Stops the auto-save timer and releases its resources.</summary>
     public void Dispose() => DisableAutoSave();
 
     // ── DTOs for JSON serialization ────────────────────────────────────────────

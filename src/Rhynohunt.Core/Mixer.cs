@@ -1,44 +1,18 @@
 namespace Rhynohunt.Core;
 
-/// <summary>
-/// Manages a collection of <see cref="Track"/> objects and renders their audio into a
-/// stereo interleaved output buffer. Called by <see cref="Rhynohunt.AudioEngine.AudioEngine"/>
-/// on every PortAudio buffer callback.
-/// </summary>
 public class Mixer
 {
     private readonly List<Track> _tracks = new List<Track>();
 
-    /// <summary>Gets the read-only list of tracks currently in this mixer.</summary>
     public IReadOnlyList<Track> Tracks => _tracks;
 
-    /// <summary>Adds a track to the mixer.</summary>
-    /// <param name="track">The track to add.</param>
     public void AddTrack(Track track) => _tracks.Add(track);
-
-    /// <summary>Removes a track from the mixer.</summary>
-    /// <param name="track">The track to remove.</param>
     public void RemoveTrack(Track track) => _tracks.Remove(track);
 
-    /// <summary>
-    /// Returns the sample rate of the first clip found across all tracks.
-    /// Falls back to 44100 Hz if no tracks have any clips loaded.
-    /// </summary>
-    /// <returns>The sample rate in Hz to use for playback.</returns>
+    // Falls back to 44100 if no clips are loaded yet
     public int GetSampleRate() =>
         _tracks.SelectMany(t => t.Clips).FirstOrDefault()?.SampleRate ?? 44100;
 
-    /// <summary>
-    /// Renders all active tracks into the provided stereo interleaved output buffer.
-    /// Respects each clip's <see cref="AudioClip.StartTime"/> and each track's gain, pan, mute, and solo settings.
-    /// Output samples are clamped to [-1.0, 1.0] to prevent clipping.
-    /// </summary>
-    /// <param name="position">The current playback position in frames (samples per channel).</param>
-    /// <param name="buffer">
-    /// The stereo interleaved float output buffer to fill, with layout [L0, R0, L1, R1, ...].
-    /// Must have at least <paramref name="frameCount"/> * 2 elements.
-    /// </param>
-    /// <param name="frameCount">The number of frames (sample pairs) to render.</param>
     public void Render(int position, float[] buffer, int frameCount)
     {
         Array.Clear(buffer, 0, frameCount * 2);

@@ -3,11 +3,6 @@ using Rhynohunt.Core;
 
 namespace Rhynohunt.AudioEngine;
 
-/// <summary>
-/// Wraps PortAudio to drive real-time playback of a <see cref="Mixer"/>.
-/// Supports play, pause (position preserved), and stop (position reset).
-/// Implements <see cref="IDisposable"/> to release the PortAudio stream.
-/// </summary>
 public class AudioEngine : IDisposable
 {
     private readonly Mixer _mixer;
@@ -17,18 +12,9 @@ public class AudioEngine : IDisposable
     private readonly int _outputDevice;
     private readonly double _outputLatency;
 
-    /// <summary>Gets a value indicating whether the engine is currently playing.</summary>
     public bool IsPlaying => _isPlaying;
-
-    /// <summary>Gets the current playback position in samples (per channel).</summary>
     public int Position => _position;
 
-    /// <summary>
-    /// Initializes a new <see cref="AudioEngine"/> for the specified mixer and output device.
-    /// Queries the device's default low-output latency at construction time.
-    /// </summary>
-    /// <param name="mixer">The <see cref="Mixer"/> that will supply audio data.</param>
-    /// <param name="outputDevice">The PortAudio device index to use for output.</param>
     public AudioEngine(Mixer mixer, int outputDevice)
     {
         _mixer = mixer;
@@ -39,12 +25,6 @@ public class AudioEngine : IDisposable
         PortAudio.Terminate();
     }
 
-    /// <summary>
-    /// Starts playback from the current position.
-    /// Does nothing if the engine is already playing.
-    /// Opens and starts a stereo Float32 PortAudio stream with 256 frames per buffer.
-    /// The sample rate is determined dynamically by <see cref="Mixer.GetSampleRate"/>.
-    /// </summary>
     public void Play()
     {
         if (_isPlaying) return;
@@ -72,10 +52,6 @@ public class AudioEngine : IDisposable
         Console.WriteLine("Playback started.");
     }
 
-    /// <summary>
-    /// Pauses playback, preserving the current position so playback can be resumed with <see cref="Play"/>.
-    /// Does nothing if the engine is not currently playing.
-    /// </summary>
     public void Pause()
     {
         if (!_isPlaying) return;
@@ -87,10 +63,6 @@ public class AudioEngine : IDisposable
         Console.WriteLine($"Paused at position {_position}.");
     }
 
-    /// <summary>
-    /// Stops playback and resets the playback position to 0.
-    /// Safe to call whether or not the engine is currently playing.
-    /// </summary>
     public void Stop()
     {
         if (_stream != null)
@@ -125,21 +97,11 @@ public class AudioEngine : IDisposable
         return StreamCallbackResult.Continue;
     }
 
-    /// <summary>
-    /// Sets the playback position to the specified sample offset (per channel).
-    /// Safe to call while playing or paused.
-    /// </summary>
-    /// <param name="samplePosition">The sample position to seek to (per channel).</param>
     public void Seek(int samplePosition)
     {
         _position = samplePosition;
     }
 
-    /// <summary>
-    /// Releases the PortAudio stream if it is open.
-    /// Note: does not call <c>PortAudio.Terminate()</c> — callers should ensure
-    /// <see cref="Stop"/> or <see cref="Pause"/> is called before disposing to avoid resource leaks.
-    /// </summary>
     public void Dispose()
     {
         if (_stream != null)
@@ -150,12 +112,6 @@ public class AudioEngine : IDisposable
         }
     }
 
-    /// <summary>
-    /// Searches all PortAudio output devices for one whose name contains the given substring (case-insensitive).
-    /// </summary>
-    /// <param name="nameContains">A substring to match against device names.</param>
-    /// <returns>The device index of the first matching output device.</returns>
-    /// <exception cref="Exception">Thrown when no matching output device is found.</exception>
     public static int FindOutputDevice(string nameContains)
     {
         PortAudio.Initialize();
@@ -175,8 +131,6 @@ public class AudioEngine : IDisposable
         throw new Exception($"No output device found containing '{nameContains}'");
     }
 
-    /// <summary>Returns the PortAudio default output device index.</summary>
-    /// <returns>The index of the system's default output device.</returns>
     public static int DefaultOutputDevice()
     {
         PortAudio.Initialize();

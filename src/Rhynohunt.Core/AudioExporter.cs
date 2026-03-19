@@ -3,20 +3,10 @@ using NAudio.Wave;
 
 namespace Rhynohunt.Core;
 
-/// <summary>
-/// Renders a <see cref="Session"/> to an audio file on disk.
-/// The full timeline is mixed offline using <see cref="Mixer.Render"/> and written in a
-/// single pass — no audio device is required.
-/// </summary>
 public static class AudioExporter
 {
     private const int ChunkFrames = 4096;
 
-    /// <summary>
-    /// Renders the entire session mix and writes it to a 32-bit IEEE float stereo WAV file.
-    /// </summary>
-    /// <param name="session">The session to export.</param>
-    /// <param name="outputPath">The destination file path for the WAV file.</param>
     public static void ExportWav(Session session, string outputPath)
     {
         var (mixer, totalFrames, sampleRate) = PrepareRender(session);
@@ -29,16 +19,7 @@ public static class AudioExporter
         writer.WriteSamples(fullBuffer, 0, fullBuffer.Length);
     }
 
-    /// <summary>
-    /// Renders the entire session mix and encodes it as an MP3 file.
-    /// Requires <c>ffmpeg</c> or <c>lame</c> to be installed and on the system PATH.
-    /// On macOS: <c>brew install ffmpeg</c>.  On Windows/Linux: install ffmpeg from ffmpeg.org.
-    /// </summary>
-    /// <param name="session">The session to export.</param>
-    /// <param name="outputPath">The destination file path for the MP3 file.</param>
-    /// <exception cref="InvalidOperationException">
-    /// Thrown when neither <c>ffmpeg</c> nor <c>lame</c> is available on the PATH.
-    /// </exception>
+    // Requires ffmpeg or lame on PATH (macOS: brew install ffmpeg)
     public static void ExportMp3(Session session, string outputPath)
     {
         // Render to a temp WAV first, then encode with a CLI tool
@@ -56,10 +37,6 @@ public static class AudioExporter
 
     // ── Helpers ───────────────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Builds a <see cref="Mixer"/> from the session's tracks and calculates the total
-    /// frame count and sample rate needed for rendering.
-    /// </summary>
     private static (Mixer mixer, int totalFrames, int sampleRate) PrepareRender(Session session)
     {
         var mixer = new Mixer();
@@ -78,10 +55,6 @@ public static class AudioExporter
         return (mixer, totalFrames, sampleRate);
     }
 
-    /// <summary>
-    /// Renders the entire timeline into a single stereo interleaved float buffer using
-    /// fixed-size chunks to avoid large per-frame allocations.
-    /// </summary>
     private static float[] RenderFull(Mixer mixer, int totalFrames)
     {
         float[] fullBuffer = new float[totalFrames * 2];
@@ -97,10 +70,6 @@ public static class AudioExporter
         return fullBuffer;
     }
 
-    /// <summary>
-    /// Encodes a WAV file to MP3 by invoking <c>ffmpeg</c> or <c>lame</c> as a subprocess.
-    /// Tries ffmpeg first, then lame. Throws if neither is found.
-    /// </summary>
     private static void EncodeMp3WithCli(string inputWav, string outputMp3)
     {
         var candidates = new (string tool, string args)[]

@@ -2,17 +2,9 @@ using PortAudioSharp;
 
 namespace Rhynohunt.AudioEngine;
 
-/// <summary>
-/// Provides static utility methods for testing PortAudio device enumeration,
-/// sine wave playback, audio recording, and record-then-playback round-trips.
-/// Intended for development and diagnostic use only.
-/// </summary>
+// Utility class for testing PortAudio devices and basic audio I/O — dev use only
 public class AudioTest
 {
-    /// <summary>
-    /// Prints all available PortAudio devices to the console, including
-    /// their index, name, and maximum input/output channel counts.
-    /// </summary>
     public static void ListDevices()
     {
         PortAudio.Initialize();
@@ -29,13 +21,6 @@ public class AudioTest
         PortAudio.Terminate();
     }
 
-    /// <summary>
-    /// Plays a sine wave tone on the specified output device for a given duration.
-    /// The tone is output as stereo Float32 at 44100 Hz with 256 frames per buffer.
-    /// </summary>
-    /// <param name="deviceIndex">The PortAudio output device index to use.</param>
-    /// <param name="frequency">The frequency of the sine wave in Hz. Defaults to 440 Hz (concert A).</param>
-    /// <param name="durationSeconds">How long to play the tone, in seconds. Defaults to 3.</param>
     public static void PlaySineWave(int deviceIndex, double frequency = 440.0, int durationSeconds = 3)
     {
         PortAudio.Initialize();
@@ -82,12 +67,6 @@ public class AudioTest
         PortAudio.Terminate();
     }
 
-    /// <summary>
-    /// Records mono audio from the specified input device for a given duration
-    /// and reports the total number of captured samples to the console.
-    /// </summary>
-    /// <param name="deviceIndex">The PortAudio input device index to use.</param>
-    /// <param name="durationSeconds">How long to record, in seconds. Defaults to 5.</param>
     public static void RecordAudio(int deviceIndex, int durationSeconds = 5)
     {
         PortAudio.Initialize();
@@ -132,13 +111,6 @@ public class AudioTest
         Console.WriteLine($"Captured {recordedSamples.Count} samples.");
     }
 
-    /// <summary>
-    /// Records mono audio from an input device, then immediately plays it back
-    /// as stereo on an output device. Useful for verifying end-to-end audio routing.
-    /// </summary>
-    /// <param name="inputDevice">The PortAudio input device index to record from.</param>
-    /// <param name="outputDevice">The PortAudio output device index to play back through.</param>
-    /// <param name="durationSeconds">How long to record, in seconds. Defaults to 5.</param>
     public static void RecordThenPlayback(int inputDevice, int outputDevice, int durationSeconds = 5)
     {
         PortAudio.Initialize();
