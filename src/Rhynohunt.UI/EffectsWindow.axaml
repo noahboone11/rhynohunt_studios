@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:Rhynohunt.Core;assembly=Rhynohunt.Core"
+        x:DataType="core:Track"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Rhynohunt.UI.EffectsWindow"
+        Title="EffectsWindow">
+   
+    <StackPanel>
+        <TextBlock Text="Gain"></TextBlock>
+        <TextBlock Text="{Binding Gain}"></TextBlock>
+        <Slider Minimum="0" Maximum="12" Value="{Binding Gain }"></Slider>
+        <TextBlock Text="Pan"></TextBlock>
+        <TextBlock Text="{Binding Pan}"></TextBlock>
+        <Slider Minimum="-1" Maximum="1" Value="{Binding Pan}"></Slider>
+        
+        
+    </StackPanel>
+    
+    
+</Window>
