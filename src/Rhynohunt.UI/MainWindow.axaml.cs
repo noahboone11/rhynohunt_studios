@@ -61,7 +61,11 @@ public partial class MainWindow : Window
 
     private void stopclicked(Object sender, RoutedEventArgs e)
     {
-        controller.Stop();
+        if (controller.IsPlaying)
+        {            
+            controller.Stop();
+        }
+        
     }
 
     private void Addclip(object? sender, RoutedEventArgs e)
