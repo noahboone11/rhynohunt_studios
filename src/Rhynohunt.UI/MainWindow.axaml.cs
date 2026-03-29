@@ -37,10 +37,12 @@ public partial class MainWindow : Window
         });
         if (files.Count > 0)
         {
+            Console.WriteLine("Here");
             var dialog = new NameDialog();
+
             var TrackName = await dialog.ShowDialog<string?>(this);
             Console.WriteLine($"Importing {TrackName}");
-            var path = files[0].Path.AbsolutePath;
+            var path = files[0].Path.LocalPath;
             var curtrack = SESSION.AddTrack(TrackName);
             SESSION.LoadClipOnTrack(curtrack,path,TimeSpan.FromSeconds(0));
             Console.WriteLine($"Imported {TrackName}");
@@ -59,8 +61,7 @@ public partial class MainWindow : Window
 
     private void stopclicked(Object sender, RoutedEventArgs e)
     {
-        if (controller.IsPlaying)
-            controller.Stop();
+        controller.Stop();
     }
 
     private void Addclip(object? sender, RoutedEventArgs e)
