@@ -67,6 +67,11 @@ public class TransportController : IDisposable
 
     private void OnTimerElapsed(object? sender, System.Timers.ElapsedEventArgs e)
     {
+        int totalFrames = (int)(TotalTime.TotalSeconds * _mixer.GetSampleRate());
+        if (totalFrames > 0 && _engine.Position >= totalFrames)
+            
+            _engine.Seek(0);
+
         TimeChanged?.Invoke();
     }
 
