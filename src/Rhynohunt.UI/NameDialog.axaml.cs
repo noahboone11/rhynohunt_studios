@@ -1,5 +1,7 @@
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
 
@@ -16,4 +18,19 @@ public partial class NameDialog : Window
     {
         Close(NameBox.Text);
     }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+        if (e.Key == Key.Escape)
+        {
+            Close(NameBox.Text);
+        }
+
+        if (e.Key == Key.Enter)
+        {
+            Close(NameBox.Text);
+        }
+    }
+    
 }
