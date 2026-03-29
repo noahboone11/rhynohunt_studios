@@ -28,22 +28,30 @@ public partial class MainWindow : Window
     private async void ImportClicked(Object sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
+        if (toplevel?.StorageProvider is null)
+            return;
         
         var files = await toplevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "Choose AudioClip",
             AllowMultiple = false
         });
-        if (files.Count > 0)
-        {
-            var dialog = new NameDialog();
-            var TrackName = await dialog.ShowDialog<string?>(this);
-            Console.WriteLine($"Importing {TrackName}");
-            var path = files[0].Path.AbsolutePath;
-            var curtrack = SESSION.AddTrack(TrackName);
-            SESSION.LoadClipOnTrack(curtrack,path,TimeSpan.FromSeconds(0));
-            Console.WriteLine($"Imported {TrackName}");
-        }
+        if (files.Count == 0)
+            return;
+
+        var trackPath = GetLocalPath(files[0]);
+        if (trackPath is null)
+            return;
+
+        var dialog = new NameDialog();
+        var trackName = await dialog.ShowDialog<string?>(this);
+        if (string.IsNullOrWhiteSpace(trackName))
+            return;
+
+        Console.WriteLine($"Importing {trackName}");
+        var currentTrack = SESSION.AddTrack(trackName.Trim());
+        SESSION.LoadClipOnTrack(currentTrack, trackPath, TimeSpan.Zero);
+        Console.WriteLine($"Imported {trackName}");
     }
 
     private void playclicked(Object sender, RoutedEventArgs e)
@@ -78,12 +86,21 @@ public partial class MainWindow : Window
     private async void LoadClicked(object? sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
+        if (toplevel?.StorageProvider is null)
+            return;
+
         var files = await toplevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "Choose AudioClip",
             AllowMultiple = false
         });
-        var path = files[0].Path.AbsolutePath;
+        if (files.Count == 0)
+            return;
+
+        var path = GetLocalPath(files[0]);
+        if (path is null)
+            return;
+
         SESSION = Session.Load(path);
         
         DataContext = null;
@@ -93,12 +110,29 @@ public partial class MainWindow : Window
     private async void SaveClicked(object? sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
+        if (toplevel?.StorageProvider is null)
+            return;
+
         var files = await toplevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "Choose AudioClip",
             AllowMultiple = false
         });
-        var path = files[0].Path.AbsolutePath;
+        if (files.Count == 0)
+            return;
+
+        var path = GetLocalPath(files[0]);
+        if (path is null)
+            return;
+
         SESSION.Save(path);
+    }
+
+    private static string? GetLocalPath(IStorageItem item)
+    {
+        if (item.Path.IsFile)
+            return item.Path.LocalPath;
+
+        return null;
     }
 }
