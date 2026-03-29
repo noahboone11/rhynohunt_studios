@@ -1,17 +1,39 @@
 namespace Rhynohunt.Core;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
-public class Track
+public class Track: INotifyPropertyChanged
 {
     private readonly ObservableCollection<AudioClip> _clips = new();
     private readonly List<IEffect> _effects = new List<IEffect>();
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public string Name { get; set; }
     public ObservableCollection<AudioClip> Clips => _clips;
     public IReadOnlyList<IEffect> Effects => _effects;
 
-    public float Gain { get; set; } = 1.0f;
-    public float Pan { get; set; } = 0.0f;
+    private float defaultGain = 1.0f;
+    public float Gain
+    {
+        get => defaultGain;
+        set
+        {
+            if (defaultGain == value) return;
+            defaultGain = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Gain)));
+        }
+    }
+    public float defaultPan = 0.0f;
+    public float Pan
+    {
+        get => defaultPan;
+        set
+        {
+            if (defaultPan == value) return;
+            defaultPan = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Gain)));
+        }
+    }
     public bool IsMuted { get; set; } = false;
     public bool IsSolo { get; set; } = false;
 

@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
@@ -60,7 +61,11 @@ public partial class MainWindow : Window
 
     private void stopclicked(Object sender, RoutedEventArgs e)
     {
-        controller.Stop();
+        if (controller.IsPlaying)
+        {            
+            controller.Stop();
+        }
+        
     }
 
     private void Addclip(object? sender, RoutedEventArgs e)
@@ -75,6 +80,18 @@ public partial class MainWindow : Window
         track.AddClip(CopiedClip, lastend);
         Console.WriteLine(track.Clips.Count);
         
+    }
+
+    private async void EffectsPanel(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button || button.DataContext is not Track track)
+            return;
+        
+    }
+
+    private void Pauseclicked(Object sender, RoutedEventArgs e)
+    {
+        controller.Pause();
     }
 
     private async void LoadClicked(object? sender, RoutedEventArgs e)
@@ -92,6 +109,17 @@ public partial class MainWindow : Window
         DataContext = SESSION;
     }
 
+    private async void EffectsSelected(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button || button.DataContext is not Track track)
+        {
+            return;
+        }
+        var effectsDialog = new EffectsWindow(track);
+        await effectsDialog.ShowDialog(this);
+        Console.WriteLine(track.Gain);
+    }
+
     private async void SaveClicked(object? sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
@@ -102,5 +130,15 @@ public partial class MainWindow : Window
         });
         var path = files[0].Path.AbsolutePath;
         SESSION.Save(path);
+    }
+    
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+
+        if (e.Key == Key.Escape)
+        {
+            Close(string.Empty);
+        }
     }
 }

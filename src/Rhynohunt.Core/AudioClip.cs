@@ -1,9 +1,11 @@
 using NAudio.Wave;
+using System.ComponentModel;
 
 namespace Rhynohunt.Core;
 
-public class AudioClip
+public class AudioClip : INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler? PropertyChanged;
     public string FilePath { get; private set; }
     public float[] Samples { get; private set; }
     public int SampleRate { get; private set; }

@@ -7,11 +7,13 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
-using Rhynohunt.Core;
 using Rhynohunt.AudioEngine;
+using Track = Rhynohunt.Core.Track;
 
 namespace Rhynohunt.UI;
 
@@ -21,5 +23,15 @@ public partial class EffectsWindow : Window
     {
         InitializeComponent();
         DataContext = track;
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+
+        if (e.Key == Key.Escape)
+        {
+            Close(string.Empty);
+        }
     }
 }
