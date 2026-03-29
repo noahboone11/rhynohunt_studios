@@ -79,14 +79,12 @@ public partial class MainWindow : Window
         var lastend = track.Clips.Max(curclip => curclip.StartTime + curclip.Duration);
         track.AddClip(CopiedClip, lastend);
         Console.WriteLine(track.Clips.Count);
-        
     }
 
     private async void EffectsPanel(object? sender, RoutedEventArgs e)
     {
         if (sender is not Button button || button.DataContext is not Track track)
             return;
-        
     }
 
     private void Pauseclicked(Object sender, RoutedEventArgs e)

@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -8,14 +7,14 @@ using Rhynohunt.Core;
 
 namespace Rhynohunt.UI;
 
-public class MovableBorder: Border
+public class MovableBorder : Border
 {
-    public static readonly StyledProperty<AudioClip?> AudioClipProperty = AvaloniaProperty.Register<MovableBorder, AudioClip?>(nameof(AudioClip));
-    
-    private bool pressed;
-    private Point positionofblock;
-    private readonly TranslateTransform transform = new TranslateTransform();
-    private double offsetX;
+    public static readonly StyledProperty<AudioClip?> AudioClipProperty =
+        AvaloniaProperty.Register<MovableBorder, AudioClip?>(nameof(AudioClip));
+
+    private bool _pressed;
+    private readonly TranslateTransform _transform = new();
+    private double _offsetX;
 
     public AudioClip? AudioClip
     {
@@ -25,50 +24,60 @@ public class MovableBorder: Border
 
     public MovableBorder()
     {
-        RenderTransform = transform;
+        RenderTransform = _transform;
+
+        AttachedToVisualTree += (_, _) =>
+        {
+            if (AudioClip != null)
+                _transform.X = AudioClip.LeftPixels;
+        };
     }
-    
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == AudioClipProperty && change.NewValue is AudioClip clip)
+            _transform.X = clip.LeftPixels;
+    }
+
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
-        pressed = true;
+        _pressed = true;
+
         var parent = Parent as Visual;
         if (parent == null) return;
-        var CurrentPos = e.GetPosition(parent);
-        offsetX = CurrentPos.X - transform.X;
+
+        var currentPos = e.GetPosition(parent);
+        _offsetX = currentPos.X - _transform.X;
+
         e.Pointer.Capture(this);
-        double starttime = GetstartTime();
-        Console.WriteLine($"Start time: {starttime} seconds");
         base.OnPointerPressed(e);
     }
 
     protected override void OnPointerMoved(PointerEventArgs e)
     {
-        if (!pressed) return;
+        if (!_pressed) return;
+
         var parent = Parent as Visual;
         if (parent == null) return;
 
-        var CurrentPos = e.GetPosition(parent);
+        var currentPos = e.GetPosition(parent);
+        _transform.X = Math.Max(0, currentPos.X - _offsetX);
 
-        transform.X = Math.Max(0,CurrentPos.X - offsetX);
-        if (AudioClip != null)
-        {
-            AudioClip.StartTime = TimeSpan.FromSeconds(GetstartTime());
-        }
-        
         base.OnPointerMoved(e);
     }
-    
+
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
-        pressed = false;
+        _pressed = false;
+
+        if (AudioClip != null)
+            AudioClip.StartTime = TimeSpan.FromSeconds(_transform.X / 15.0);
+
         if (e.Pointer.Captured == this)
             e.Pointer.Capture(null);
-        base.OnPointerReleased(e);
-    }
 
-    protected double GetstartTime()
-    {
-        double startpos = transform.X;
-        return startpos / 15;
+        base.OnPointerReleased(e);
     }
 }
