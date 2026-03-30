@@ -12,11 +12,22 @@ public class AudioClip : INotifyPropertyChanged
     public int Channels { get; private set; }
 
     public TimeSpan Duration => TimeSpan.FromSeconds((double)Samples.Length / (SampleRate * Channels));
-
+    
+    private TimeSpan _startTime = TimeSpan.Zero;
+    public TimeSpan StartTime
+    {
+        get => _startTime;
+        set
+        {
+            if (_startTime == value) return;
+            _startTime = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StartTime)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LeftPixels)));
+        }
+    }
+    
     public float Durvisual => (float)Duration.TotalSeconds * 15;
     public double LeftPixels => (float)StartTime.TotalSeconds * 15;
-
-    public TimeSpan StartTime { get; set; } = TimeSpan.Zero;
 
     private AudioClip(string filePath, float[] samples, int sampleRate, int channels)
     {

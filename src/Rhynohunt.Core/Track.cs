@@ -31,7 +31,7 @@ public class Track: INotifyPropertyChanged
         {
             if (defaultPan == value) return;
             defaultPan = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Gain)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Pan)));
         }
     }
     public bool IsMuted { get; set; } = false;
