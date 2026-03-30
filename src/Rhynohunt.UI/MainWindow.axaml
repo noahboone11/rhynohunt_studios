@@ -33,9 +33,10 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="core:Track">
                     <StackPanel Background="#333333" Height="51"  >
-                        <TextBlock Text="{Binding Name}" Foreground="White"/>
-                        <Button HorizontalAlignment="Center" Click="Addclip"></Button>
-                        <Button HorizontalAlignment="Center" Click="EffectsSelected"></Button>
+                        <Border Height="3" ></Border>
+                        <TextBlock Text="{Binding Name}" FontSize="12" FontStyle="Normal" HorizontalAlignment="Center" Foreground="White"/>
+                        <Button HorizontalAlignment="Center" Click="Addclip" ToolTip.Tip="Add a clip"></Button>
+                        <Button HorizontalAlignment="Center" Click="EffectsSelected" ToolTip.Tip="Open Effects Panel"></Button>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
