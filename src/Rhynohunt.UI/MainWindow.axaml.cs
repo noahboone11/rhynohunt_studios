@@ -19,6 +19,8 @@ public partial class MainWindow : Window
     //Controller
     public Session SESSION = new Session();
     TransportController controller = new TransportController(AudioEngine.AudioEngine.DefaultOutputDevice());
+    private TranslateTransform playheadTransform = new();
+    
     
     public MainWindow()
     {
@@ -49,7 +51,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void playclicked(Object sender, RoutedEventArgs e)
+    private async void playclicked(Object sender, RoutedEventArgs e)
     {
         if (controller.IsPlaying)
         {
@@ -60,6 +62,13 @@ public partial class MainWindow : Window
             controller.Mixer.AddTrack(LoadedTracks);
         }
         controller.Play();
+        
+        PlayPosition.RenderTransform = playheadTransform;
+        while (controller.IsPlaying)
+        {
+            playheadTransform.X = controller.CurrentTime.TotalSeconds * 15;
+            await Task.Delay(16);
+        }
         
     }
 

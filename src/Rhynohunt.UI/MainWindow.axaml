@@ -66,7 +66,7 @@
                                         <local:MovableBorder AudioClip="{Binding}"
                                                              Width="{Binding Durvisual}"
                                                              Height="20"
-                                                             Background="Black"
+                                                             Background="LimeGreen"
                                                              CornerRadius="10"
                                                              Canvas.Left="{Binding LeftPixels}"
                                                              Canvas.Top="30">
@@ -78,6 +78,9 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            
+            <Border x:Name="PlayPosition" Grid.Row="1" Width="1" Background="Red" HorizontalAlignment="Left" VerticalAlignment="Stretch" IsHitTestVisible="False" ZIndex="100"></Border>
+            
         </Grid>
         
     </Grid>
