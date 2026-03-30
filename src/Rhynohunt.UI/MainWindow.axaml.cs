@@ -51,6 +51,10 @@ public partial class MainWindow : Window
 
     private void playclicked(Object sender, RoutedEventArgs e)
     {
+        if (controller.IsPlaying)
+        {
+            return;
+        }
         foreach (var LoadedTracks in SESSION._tracks)
         {
             controller.Mixer.AddTrack(LoadedTracks);
