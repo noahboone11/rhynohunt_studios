@@ -11,11 +11,12 @@ public static class AudioExporter
     {
         var (mixer, totalFrames, sampleRate) = PrepareRender(session);
         if (totalFrames == 0) return;
-
+        Directory.CreateDirectory(outputPath);
+        string fileName = $"beat_{DateTime.Now:yyyyMMdd_HHmmss}.wav";
+        string mypath = Path.Combine(outputPath, fileName);
         float[] fullBuffer = RenderFull(mixer, totalFrames);
-
         var waveFormat = WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, 2);
-        using var writer = new WaveFileWriter(outputPath, waveFormat);
+        using var writer = new WaveFileWriter(mypath, waveFormat);
         writer.WriteSamples(fullBuffer, 0, fullBuffer.Length);
     }
 

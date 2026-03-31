@@ -2,8 +2,11 @@ using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using Rhynohunt.Core;
+using System.Threading.Tasks;
+
 
 namespace Rhynohunt.UI;
 
@@ -12,9 +15,28 @@ public class MovableBorder : Border
     public static readonly StyledProperty<AudioClip?> AudioClipProperty =
         AvaloniaProperty.Register<MovableBorder, AudioClip?>(nameof(AudioClip));
 
-    private bool _pressed;
+    private bool pressed;
     private readonly TranslateTransform _transform = new();
-    private double _offsetX;
+    private double offsetX;
+    public event Action<AudioClip>? RightClickedClip;
+    public event Action<AudioClip>? HoveredClip; 
+    
+    public static readonly RoutedEvent<RoutedEventArgs> ClipRightClickedEvent = 
+        RoutedEvent.Register<MovableBorder, RoutedEventArgs>(nameof(ClipRightClicked), RoutingStrategies.Bubble);
+    public static readonly RoutedEvent<RoutedEventArgs> HoveredClipEvent = 
+        RoutedEvent.Register<MovableBorder, RoutedEventArgs>(nameof(HoveredClip), RoutingStrategies.Bubble);
+
+    public event EventHandler<RoutedEventArgs> ClipRightClicked
+    {
+        add => AddHandler(ClipRightClickedEvent, value);
+        remove => RemoveHandler(ClipRightClickedEvent, value);
+    }
+    
+    public event EventHandler<RoutedEventArgs> Hovered
+    {
+        add => AddHandler(HoveredClipEvent, value);
+        remove => RemoveHandler(HoveredClipEvent, value);
+    }
 
     public AudioClip? AudioClip
     {
@@ -41,42 +63,70 @@ public class MovableBorder : Border
             _transform.X = clip.LeftPixels;
     }
 
-    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    protected override async void OnPointerPressed(PointerPressedEventArgs e)
     {
-        _pressed = true;
+        var click = e.GetCurrentPoint(this);
 
-        var parent = Parent as Visual;
-        if (parent == null) return;
+        if (click.Properties.IsRightButtonPressed)
+        {
+            RaiseEvent(new RoutedEventArgs(ClipRightClickedEvent));
+            e.Handled = true;
+            return;
+        }
 
-        var currentPos = e.GetPosition(parent);
-        _offsetX = currentPos.X - _transform.X;
+        if (click.Properties.IsLeftButtonPressed)
+        {
+            pressed = true;
 
-        e.Pointer.Capture(this);
+            var parent = Parent as Visual;
+            if (parent == null) return;
+
+            var currentPos = e.GetPosition(parent);
+            offsetX = currentPos.X - _transform.X;
+
+            ToolTip.SetIsOpen(this, false);
+            ToolTip.SetTip(this, $"{AudioClip?.StartTime}");
+            ToolTip.SetPlacement(this, PlacementMode.Pointer);
+
+            await Task.Delay(1);
+            ToolTip.SetIsOpen(this, true);
+
+            e.Pointer.Capture(this);
+            e.Handled = true;
+        }
+
         base.OnPointerPressed(e);
     }
-
     protected override void OnPointerMoved(PointerEventArgs e)
     {
-        if (!_pressed) return;
+        if (!pressed) return;
 
         var parent = Parent as Visual;
         if (parent == null) return;
 
         var currentPos = e.GetPosition(parent);
-        _transform.X = Math.Max(0, currentPos.X - _offsetX);
+        _transform.X = Math.Max(0, currentPos.X - offsetX);
+
+        if (AudioClip != null)
+        {
+            var time = TimeSpan.FromSeconds(_transform.X / 15.0);
+            ToolTip.SetTip(this, $"{time:mm\\:ss\\.ff}");
+        }
 
         base.OnPointerMoved(e);
     }
 
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
-        _pressed = false;
+        pressed = false;
 
         if (AudioClip != null)
             AudioClip.StartTime = TimeSpan.FromSeconds(_transform.X / 15.0);
 
         if (e.Pointer.Captured == this)
             e.Pointer.Capture(null);
+        
+        ToolTip.SetIsOpen(this, false);
 
         base.OnPointerReleased(e);
     }

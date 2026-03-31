@@ -24,6 +24,8 @@
                         <Button Content="Pause" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="Pauseclicked"></Button>
                         <Button Content="Load" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="LoadClicked"></Button>
                         <Button Content="Save" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="SaveClicked"></Button>
+                        <Button Content="Export" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ExportClicked"></Button>
+                        <ComboBox></ComboBox>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -66,6 +68,7 @@
                                     <DataTemplate x:DataType="core:AudioClip">
                                         <local:MovableBorder AudioClip="{Binding}"
                                                              Width="{Binding Durvisual}"
+                                                             ClipRightClicked="ClipRightClicked"
                                                              Height="20"
                                                              Background="LimeGreen"
                                                              CornerRadius="10"
