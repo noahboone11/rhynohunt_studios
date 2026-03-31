@@ -60,10 +60,15 @@ public partial class MainWindow : Window
         {
             return;
         }
-        foreach (var LoadedTracks in SESSION._tracks)
+
+        if (!(controller.Mixer.Tracks.Count > 0))
         {
-            controller.Mixer.AddTrack(LoadedTracks);
+            foreach (var LoadedTracks in SESSION._tracks)
+            {
+                controller.Mixer.AddTrack(LoadedTracks);
+            }
         }
+
         controller.Play();
         
         PlayPosition.RenderTransform = playheadTransform;
