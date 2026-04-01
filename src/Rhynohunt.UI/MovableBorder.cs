@@ -18,7 +18,6 @@ public class MovableBorder : Border
     private bool pressed;
     private readonly TranslateTransform _transform = new();
     private double offsetX;
-    public event Action<AudioClip>? RightClickedClip;
     public event Action<AudioClip>? HoveredClip; 
     
     public static readonly RoutedEvent<RoutedEventArgs> ClipRightClickedEvent = 
@@ -26,18 +25,14 @@ public class MovableBorder : Border
     public static readonly RoutedEvent<RoutedEventArgs> HoveredClipEvent = 
         RoutedEvent.Register<MovableBorder, RoutedEventArgs>(nameof(HoveredClip), RoutingStrategies.Bubble);
 
+    //Custom event trigger to register bar has been clicked
     public event EventHandler<RoutedEventArgs> ClipRightClicked
     {
         add => AddHandler(ClipRightClickedEvent, value);
         remove => RemoveHandler(ClipRightClickedEvent, value);
     }
-    
-    public event EventHandler<RoutedEventArgs> Hovered
-    {
-        add => AddHandler(HoveredClipEvent, value);
-        remove => RemoveHandler(HoveredClipEvent, value);
-    }
 
+    //Links Bar to audio clip
     public AudioClip? AudioClip
     {
         get => GetValue(AudioClipProperty);
@@ -63,6 +58,7 @@ public class MovableBorder : Border
             _transform.X = clip.LeftPixels;
     }
 
+    //When bar is clicked register drag for left and register right click
     protected override async void OnPointerPressed(PointerPressedEventArgs e)
     {
         var click = e.GetCurrentPoint(this);
@@ -97,6 +93,8 @@ public class MovableBorder : Border
 
         base.OnPointerPressed(e);
     }
+    
+    //Update clip start time based on drag position
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         if (!pressed) return;
@@ -116,6 +114,7 @@ public class MovableBorder : Border
         base.OnPointerMoved(e);
     }
 
+    //Register release of click
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         pressed = false;

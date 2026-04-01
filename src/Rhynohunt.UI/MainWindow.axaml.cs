@@ -17,8 +17,9 @@ namespace Rhynohunt.UI;
 public partial class MainWindow : Window
 { 
     //Session
-    //Controller
     public Session SESSION = new Session();
+    
+    //Controller
     TransportController controller = new TransportController(AudioEngine.AudioEngine.DefaultOutputDevice());
     private TranslateTransform playheadTransform = new();
     
@@ -28,11 +29,12 @@ public partial class MainWindow : Window
         InitializeComponent();
         DataContext = SESSION;
     }
-
+    
+    //Controls Import button behaviour
     private async void ImportClicked(Object sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
-        
+        //Opens file picker dialog
         var files = await toplevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "Choose AudioClip",
@@ -57,7 +59,7 @@ public partial class MainWindow : Window
     }
 
 
-
+    // Controls play button behaviour
     private async void playclicked(Object sender, RoutedEventArgs e)
     {
         if (controller.IsPlaying)
@@ -66,16 +68,16 @@ public partial class MainWindow : Window
         }
 
         foreach (var LoadedTracks in SESSION._tracks)
+        {
+            if ( !controller.Mixer.Tracks.Contains(LoadedTracks))
             {
-                if ( !controller.Mixer.Tracks.Contains(LoadedTracks))
-                {
-                    controller.Mixer.AddTrack(LoadedTracks);
-                }
+                controller.Mixer.AddTrack(LoadedTracks);
             }
+        }
         
 
         controller.Play();
-        
+        //Links playhead to play position
         PlayPosition.RenderTransform = playheadTransform;
         while (controller.IsPlaying)
         {
@@ -84,10 +86,11 @@ public partial class MainWindow : Window
         }
         
     }
+    //Controls export behaviour
     private async void ExportClicked(object sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
-
+        //Opens Folder Picking dialog
         var folders = await toplevel.StorageProvider.OpenFolderPickerAsync(
             new FolderPickerOpenOptions
             {
@@ -107,6 +110,7 @@ public partial class MainWindow : Window
         Core.AudioExporter.ExportWav(SESSION, path);
     }
     
+    // Behaviour for deleting clip
     private void ClipRightClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is not MovableBorder border || border.AudioClip == null)
@@ -124,6 +128,7 @@ public partial class MainWindow : Window
         }
     }
 
+    //Stops Playing Session
     private void stopclicked(Object sender, RoutedEventArgs e)
     {
         if (controller.IsPlaying)
@@ -133,6 +138,7 @@ public partial class MainWindow : Window
         
     }
 
+    //Adds clip to selected track
     private void Addclip(object? sender, RoutedEventArgs e)
     {
         if (sender is not Button button || button.DataContext is not Track track)
@@ -146,11 +152,13 @@ public partial class MainWindow : Window
         Console.WriteLine(track.Clips.Count);
     }
 
+    //Pauses playing clip
     private void Pauseclicked(Object sender, RoutedEventArgs e)
     {
         controller.Pause();
     }
 
+    //Load previous session
     private async void LoadClicked(object? sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
@@ -159,13 +167,18 @@ public partial class MainWindow : Window
             Title = "Choose AudioClip",
             AllowMultiple = false
         });
+        if (files.Count == 0)
+        {
+            return;
+        }
         var path = files[0].Path.AbsolutePath;
         SESSION = Session.Load(path);
         
         DataContext = null;
         DataContext = SESSION;
     }
-
+    
+    //Opens effects window 
     private async void EffectsSelected(object? sender, RoutedEventArgs e)
     {
         if (sender is not Button button || button.DataContext is not Track track)
@@ -177,6 +190,7 @@ public partial class MainWindow : Window
         Console.WriteLine(track.Gain);
     }
 
+    //Save behaviour 
     private async void SaveClicked(object? sender, RoutedEventArgs e)
     {
         var toplevel = TopLevel.GetTopLevel(this);
@@ -188,6 +202,7 @@ public partial class MainWindow : Window
         var path = files[0].Path.AbsolutePath;
         SESSION.Save(path);
     }
+    //Deletes clip from Track
     private void DeleteClipFromTrack(Track track, AudioClip clip)
     {
         track.RemoveClip(clip);
@@ -196,7 +211,16 @@ public partial class MainWindow : Window
             SESSION.RemoveTrack(track);
         }
     }
-    
+
+    private void DeleteSelected(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button || button.DataContext is not Track track)
+        {
+            return;
+        }
+        SESSION.RemoveTrack(track);
+    }
+    //Closes app when escape key is pressed
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);

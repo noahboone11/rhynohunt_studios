@@ -10,10 +10,10 @@
    
     <StackPanel>
         <TextBlock Text="Gain"></TextBlock>
-        <TextBlock Text="{Binding Gain}"></TextBlock>
+        <TextBlock Text="{Binding DisplayGain}"></TextBlock>
         <Slider Minimum="0" Maximum="12" Value="{Binding Gain }"></Slider>
         <TextBlock Text="Pan"></TextBlock>
-        <TextBlock Text="{Binding Pan}"></TextBlock>
+        <TextBlock Text="{Binding DisplayPan}"></TextBlock>
         <Slider Minimum="-1" Maximum="1" Value="{Binding Pan}"></Slider>
         
         

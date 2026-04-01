@@ -21,8 +21,10 @@ public class Track: INotifyPropertyChanged
             if (defaultGain == value) return;
             defaultGain = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Gain)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayGain)));
         }
     }
+    public double DisplayGain => Math.Truncate(Gain * 100) / 100;
     public float defaultPan = 0.0f;
     public float Pan
     {
@@ -32,8 +34,10 @@ public class Track: INotifyPropertyChanged
             if (defaultPan == value) return;
             defaultPan = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Pan)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayPan)));
         }
     }
+    public double DisplayPan => Math.Truncate(Pan * 100) / 100;
     public bool IsMuted { get; set; } = false;
     public bool IsSolo { get; set; } = false;
 

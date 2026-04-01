@@ -36,8 +36,12 @@
                     <StackPanel Background="#333333" Height="51"  >
                         <Border Height="3" ></Border>
                         <TextBlock Text="{Binding Name}" FontSize="12" FontStyle="Normal" HorizontalAlignment="Center" Foreground="White"/>
-                        <Button HorizontalAlignment="Center" Click="Addclip" ToolTip.Tip="Add a clip"></Button>
-                        <Button HorizontalAlignment="Center" Click="EffectsSelected" ToolTip.Tip="Open Effects Panel"></Button>
+                        <Grid ColumnDefinitions="*,*,*">
+                            <Button HorizontalAlignment="Center" Click="Addclip" ToolTip.Tip="Add a clip"></Button> 
+                            <Button Grid.Column="1" HorizontalAlignment="Center" Click="EffectsSelected" ToolTip.Tip="Open Effects Panel"></Button>
+                            <Button Grid.Column="2" HorizontalAlignment="Center" Click="DeleteSelected" ToolTip.Tip="Delete Track" ></Button>
+                        </Grid>
+                        
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
