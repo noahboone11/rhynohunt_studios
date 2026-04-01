@@ -18,14 +18,13 @@
                     <StackPanel Spacing="8">
                         <Image Source="{SvgImage avares://Rhynohunt.UI/Assets/Images/rhynohunt_transparent.svg}" Width="150"></Image> 
                         <Button Content="Import" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ImportClicked"/>
-                        <Button Content="Export" Foreground="AliceBlue" HorizontalAlignment="Stretch" ></Button>
                         <Button Content="Play" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="playclicked"></Button>
                         <Button Content="Stop" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="stopclicked" ></Button>
                         <Button Content="Pause" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="Pauseclicked"></Button>
                         <Button Content="Load" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="LoadClicked"></Button>
                         <Button Content="Save" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="SaveClicked"></Button>
                         <Button Content="Export" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ExportClicked"></Button>
-                        <ComboBox></ComboBox>
+                    
                     </StackPanel>
                 </Border>
             </Grid>

@@ -38,6 +38,10 @@ public partial class MainWindow : Window
             Title = "Choose AudioClip",
             AllowMultiple = false
         });
+        if (files.Count == 0)
+        {
+            return;
+        }
         if (files.Count > 0)
         {
             Console.WriteLine("Here");
@@ -61,13 +65,14 @@ public partial class MainWindow : Window
             return;
         }
 
-        if (!(controller.Mixer.Tracks.Count > 0))
-        {
-            foreach (var LoadedTracks in SESSION._tracks)
+        foreach (var LoadedTracks in SESSION._tracks)
             {
-                controller.Mixer.AddTrack(LoadedTracks);
+                if ( !controller.Mixer.Tracks.Contains(LoadedTracks))
+                {
+                    controller.Mixer.AddTrack(LoadedTracks);
+                }
             }
-        }
+        
 
         controller.Play();
         
