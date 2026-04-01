@@ -1,6 +1,7 @@
 using Rhynohunt.Core;
 using Rhynohunt.AudioEngine;
 
+// Local test audio source used across all smoke-test scenarios.
 const string AudioFile = "/Users/hunter/RiderProjects/rhynohunt_studios/audio_files/ff-16b-2c-44100hz.mp3";
 AudioTest.ListDevices();
 // ── Task 1: Multiple clips with timeline positions ────────────────────────────
@@ -33,6 +34,7 @@ session2.LoadClipOnTrack(t2, AudioFile, TimeSpan.Zero);
 using var controller = new TransportController(AudioEngine.DefaultOutputDevice());
 controller.Mixer.AddTrack(t2);
 
+// Track that transport events are being raised during play/seek/stop flow.
 int timeEvents  = 0;
 int stateEvents = 0;
 controller.TimeChanged          += () => timeEvents++;
@@ -41,6 +43,7 @@ controller.PlaybackStateChanged += () => stateEvents++;
 Console.WriteLine($"  TotalTime      : {controller.TotalTime:g}");
 Console.WriteLine($"  IsPlaying      : {controller.IsPlaying}");
 
+// Short sleeps allow the realtime engine/timer callbacks to advance state.
 controller.Play();
 Thread.Sleep(1500);
 controller.Seek(TimeSpan.FromSeconds(2));
@@ -90,6 +93,7 @@ string sessionPath = Path.Combine(Path.GetTempPath(), "rhynohunt_test_session.js
 session.Save(sessionPath);
 Console.WriteLine($"  Saved to  : {sessionPath}");
 
+// Reload from disk to validate serialization round-trip.
 var loaded = Session.Load(sessionPath);
 Console.WriteLine($"  Loaded    : {loaded._tracks.Count} tracks");
 Console.WriteLine($"  Track 0   : '{loaded._tracks[0].Name}', {loaded._tracks[0].Clips.Count} clip(s), Gain={loaded._tracks[0].Gain}");

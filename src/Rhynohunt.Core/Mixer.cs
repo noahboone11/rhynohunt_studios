@@ -1,5 +1,6 @@
 namespace Rhynohunt.Core;
 
+// Mixes all session tracks into a single stereo output buffer.
 public class Mixer
 {
     private readonly List<Track> _tracks = new List<Track>();
@@ -13,6 +14,7 @@ public class Mixer
     public int GetSampleRate() =>
         _tracks.SelectMany(t => t.Clips).FirstOrDefault()?.SampleRate ?? 44100;
 
+    // position is a frame offset into the global session timeline.
     public void Render(int position, float[] buffer, int frameCount)
     {
         Array.Clear(buffer, 0, frameCount * 2);

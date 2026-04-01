@@ -5,6 +5,7 @@ namespace Rhynohunt.AudioEngine;
 // Utility class for testing PortAudio devices and basic audio I/O — dev use only
 public class AudioTest
 {
+    // Prints all PortAudio devices with input/output channel capability.
     public static void ListDevices()
     {
         PortAudio.Initialize();
@@ -21,6 +22,7 @@ public class AudioTest
         PortAudio.Terminate();
     }
 
+    // Generates a realtime sine tone and plays it through the selected output device.
     public static void PlaySineWave(int deviceIndex, double frequency = 440.0, int durationSeconds = 3)
     {
         PortAudio.Initialize();
@@ -42,6 +44,7 @@ public class AudioTest
             streamFlags: StreamFlags.ClipOff,
             callback: (IntPtr input, IntPtr output, uint frameCount, ref StreamCallbackTimeInfo timeInfo, StreamCallbackFlags statusFlags, IntPtr userData) =>
             {
+                // Write mono tone to both channels for centered stereo playback.
                 unsafe
                 {
                     float* out_ = (float*)output;
@@ -67,6 +70,7 @@ public class AudioTest
         PortAudio.Terminate();
     }
 
+    // Captures mono mic input for a fixed duration and reports sample count.
     public static void RecordAudio(int deviceIndex, int durationSeconds = 5)
     {
         PortAudio.Initialize();
@@ -111,6 +115,7 @@ public class AudioTest
         Console.WriteLine($"Captured {recordedSamples.Count} samples.");
     }
 
+    // Quick round-trip test: record from one device, then play it on another.
     public static void RecordThenPlayback(int inputDevice, int outputDevice, int durationSeconds = 5)
     {
         PortAudio.Initialize();
@@ -173,6 +178,7 @@ public class AudioTest
                     float* out_ = (float*)output;
                     for (int i = 0; i < frameCount; i++)
                     {
+                        // After captured samples are exhausted, output silence.
                         float sample = playbackIndex < recordedSamples.Count ? recordedSamples[playbackIndex++] : 0f;
                         out_[i * 2] = sample;       // left
                         out_[i * 2 + 1] = sample;   // right

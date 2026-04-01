@@ -1,5 +1,6 @@
 namespace Rhynohunt.Core;
 
+// Simple feedback delay operating on interleaved stereo samples.
 public class DelayEffect : IEffect
 {
     public TimeSpan DelayTime { get; set; } = TimeSpan.FromSeconds(0.5);
