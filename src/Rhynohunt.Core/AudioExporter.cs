@@ -5,8 +5,10 @@ namespace Rhynohunt.Core;
 
 public static class AudioExporter
 {
+    // Render in fixed blocks to avoid very large temporary working buffers.
     private const int ChunkFrames = 4096;
 
+    // Mixes the full session and writes a timestamped WAV file in outputPath.
     public static void ExportWav(Session session, string outputPath)
     {
         var (mixer, totalFrames, sampleRate) = PrepareRender(session);
@@ -20,7 +22,8 @@ public static class AudioExporter
         writer.WriteSamples(fullBuffer, 0, fullBuffer.Length);
     }
 
-    // Requires ffmpeg or lame on PATH (macOS: brew install ffmpeg)
+    // Requires ffmpeg or lame on PATH (macOS: brew install ffmpeg).
+    // Encodes by rendering WAV first, then converting that file to MP3.
     public static void ExportMp3(Session session, string outputPath)
     {
         // Render to a temp WAV first, then encode with a CLI tool
@@ -38,6 +41,7 @@ public static class AudioExporter
 
     // ── Helpers ───────────────────────────────────────────────────────────────
 
+    // Builds a mixer snapshot and computes total timeline length in frames.
     private static (Mixer mixer, int totalFrames, int sampleRate) PrepareRender(Session session)
     {
         var mixer = new Mixer();
@@ -56,6 +60,7 @@ public static class AudioExporter
         return (mixer, totalFrames, sampleRate);
     }
 
+    // Renders the entire session into one interleaved stereo float buffer.
     private static float[] RenderFull(Mixer mixer, int totalFrames)
     {
         float[] fullBuffer = new float[totalFrames * 2];
@@ -71,6 +76,7 @@ public static class AudioExporter
         return fullBuffer;
     }
 
+    // Tries ffmpeg first, then lame; succeeds on first zero exit code.
     private static void EncodeMp3WithCli(string inputWav, string outputMp3)
     {
         var candidates = new (string tool, string args)[]

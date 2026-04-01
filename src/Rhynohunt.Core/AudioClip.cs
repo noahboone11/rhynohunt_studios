@@ -11,6 +11,7 @@ public class AudioClip : INotifyPropertyChanged
     public int SampleRate { get; private set; }
     public int Channels { get; private set; }
 
+    // Duration is derived from total sample count and channel layout.
     public TimeSpan Duration => TimeSpan.FromSeconds((double)Samples.Length / (SampleRate * Channels));
     
     private TimeSpan _startTime = TimeSpan.Zero;
@@ -21,6 +22,7 @@ public class AudioClip : INotifyPropertyChanged
         {
             if (_startTime == value) return;
             _startTime = value;
+            // Notify both timeline time and its pixel-mapped UI position.
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StartTime)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LeftPixels)));
         }
@@ -41,6 +43,7 @@ public class AudioClip : INotifyPropertyChanged
     {
         string ext = Path.GetExtension(filePath).ToLower();
 
+        // Route decoding by extension to keep loader behavior explicit.
         return ext switch
         {
             ".wav" => LoadWav(filePath),
@@ -65,6 +68,7 @@ public class AudioClip : INotifyPropertyChanged
         float[] buffer = new float[4096];
         int read;
 
+        // NLayer returns PCM float samples already decoded from MP3 frames.
         while ((read = mp3Reader.ReadSamples(buffer, 0, buffer.Length)) > 0)
         {
             for (int i = 0; i < read; i++)
@@ -83,6 +87,7 @@ public class AudioClip : INotifyPropertyChanged
         float[] buffer = new float[4096];
         int read;
 
+        // Read the entire file into a contiguous in-memory sample buffer.
         while ((read = reader.Read(buffer, 0, buffer.Length)) > 0)
         {
             for (int i = 0; i < read; i++)

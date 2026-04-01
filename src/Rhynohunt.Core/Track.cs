@@ -2,6 +2,7 @@ namespace Rhynohunt.Core;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
+// Holds clip arrangement, mixing controls, and effect chain for one track.
 public class Track: INotifyPropertyChanged
 {
     private readonly ObservableCollection<AudioClip> _clips = new();
@@ -42,6 +43,7 @@ public class Track: INotifyPropertyChanged
         Name = name;
     }
 
+    // Adds a clip and places it at the requested timeline position.
     public void AddClip(AudioClip clip, TimeSpan startTime)
     {
         clip.StartTime = startTime;
@@ -52,6 +54,7 @@ public class Track: INotifyPropertyChanged
 
     public bool HasClips => _clips.Count > 0;
 
+    // Effects are applied in insertion order by the mixer.
     public void AddEffect(IEffect effect) => _effects.Add(effect);
     public void RemoveEffect(IEffect effect) => _effects.Remove(effect);
 }

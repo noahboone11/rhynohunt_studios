@@ -12,6 +12,7 @@ public class Session : IDisposable
     // public IReadOnlyList<Track> Tracks => _tracks;
     public ObservableCollection<Track> _tracks { get; } = new();
 
+    // Adds a new empty track to the session.
     public Track AddTrack(string name)
     {
         var track = new Track(name);
@@ -21,6 +22,7 @@ public class Session : IDisposable
 
     public void RemoveTrack(Track track) => _tracks.Remove(track);
 
+    // Loads an audio file and places it on a specific track at startTime.
     public AudioClip LoadClipOnTrack(Track track, string filePath, TimeSpan startTime)
     {
         var clip = AudioClip.Load(filePath);
@@ -78,6 +80,7 @@ public class Session : IDisposable
         return session;
     }
 
+    // Starts periodic save operations to the same session file.
     public void EnableAutoSave(string filePath, int intervalMinutes)
     {
         DisableAutoSave();
@@ -88,6 +91,7 @@ public class Session : IDisposable
         _autoSaveTimer.Start();
     }
 
+    // Stops and clears the autosave timer if one is active.
     public void DisableAutoSave()
     {
         _autoSaveTimer?.Stop();
