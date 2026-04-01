@@ -218,6 +218,11 @@ public partial class MainWindow : Window
         {
             return;
         }
+
+        if (controller.Mixer.Tracks.Contains(track))
+        {
+            controller.Mixer.RemoveTrack(track);
+        }
         SESSION.RemoveTrack(track);
     }
     //Closes app when escape key is pressed
