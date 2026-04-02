@@ -28,6 +28,17 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = SESSION;
+        Timeline.Controller = controller;
+
+        // Keep playhead in sync on seek (even while paused)
+        controller.TimeChanged += () =>
+        {
+            Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+            {
+                playheadTransform.X = controller.CurrentTime.TotalSeconds * 15;
+                PlayPosition.RenderTransform = playheadTransform;
+            });
+        };
     }
     
     //Controls Import button behaviour

@@ -10,7 +10,7 @@
         x:DataType="core:Session"
         Title="Rhynohunt.UI">
     
-    <Grid Background= "#222222" ColumnDefinitions="Auto,80,*">
+    <Grid Background= "#222222" ColumnDefinitions="Auto,110,*">
        
         <Border Background="Black" CornerRadius="30" Margin="10,10" ClipToBounds="True">
             <Grid RowDefinitions="*,Auto" Background="Black">
@@ -33,22 +33,23 @@
         <ItemsControl Grid.Column="1" Padding="0,8,0,0" ItemsSource="{Binding _tracks}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="core:Track">
-                    <StackPanel Background="#333333" Height="51"  >
-                        <Border Height="3" ></Border>
+                    <StackPanel Background="#333333" Height="51">
+                        <Border Height="3"/>
                         <TextBlock Text="{Binding Name}" FontSize="12" FontStyle="Normal" HorizontalAlignment="Center" Foreground="White"/>
-                        <Grid ColumnDefinitions="*,*,*">
-                            <Button HorizontalAlignment="Center" Click="Addclip" ToolTip.Tip="Add a clip"></Button> 
-                            <Button Grid.Column="1" HorizontalAlignment="Center" Click="EffectsSelected" ToolTip.Tip="Open Effects Panel"></Button>
-                            <Button Grid.Column="2" HorizontalAlignment="Center" Click="DeleteSelected" ToolTip.Tip="Delete Track" ></Button>
+                        <Grid ColumnDefinitions="*,*,*,*,*">
+                            <Button Content="+" Padding="0" Width="22" Height="22" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Addclip" ToolTip.Tip="Add a clip"/>
+                            <Button Grid.Column="1" Content="FX" Padding="0" Width="22" Height="22" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="EffectsSelected" ToolTip.Tip="Open Effects Panel"/>
+                            <Button Grid.Column="2" Content="X" Padding="0" Width="22" Height="22" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="DeleteSelected" ToolTip.Tip="Delete Track"/>
+                            <ToggleButton Grid.Column="3" Content="M" Padding="0" Width="22" Height="22" IsChecked="{Binding IsMuted, Mode=TwoWay}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" ToolTip.Tip="Mute"/>
+                            <ToggleButton Grid.Column="4" Content="S" Padding="0" Width="22" Height="22" IsChecked="{Binding IsSolo, Mode=TwoWay}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" ToolTip.Tip="Solo"/>
                         </Grid>
-                        
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
        
         <Grid Grid.Column="2" RowDefinitions="9,*">
-            <local:TimelineCanvas Grid.RowSpan="2" Background="#222222"/>
+            <local:TimelineCanvas x:Name="Timeline" Grid.RowSpan="2" Background="#222222"/>
             <Border Height="9"></Border>
             <ItemsControl Grid.Row="1" Padding="0,0,0,0" ItemsSource="{Binding _tracks}">
                 <ItemsControl.ItemTemplate>

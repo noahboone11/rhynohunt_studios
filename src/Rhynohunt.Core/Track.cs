@@ -39,8 +39,29 @@ public class Track: INotifyPropertyChanged
         }
     }
     public double DisplayPan => Math.Truncate(Pan * 100) / 100;
-    public bool IsMuted { get; set; } = false;
-    public bool IsSolo { get; set; } = false;
+    private bool _isMuted = false;
+    public bool IsMuted
+    {
+        get => _isMuted;
+        set
+        {
+            if (_isMuted == value) return;
+            _isMuted = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsMuted)));
+        }
+    }
+
+    private bool _isSolo = false;
+    public bool IsSolo
+    {
+        get => _isSolo;
+        set
+        {
+            if (_isSolo == value) return;
+            _isSolo = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSolo)));
+        }
+    }
 
     public Track(string name)
     {

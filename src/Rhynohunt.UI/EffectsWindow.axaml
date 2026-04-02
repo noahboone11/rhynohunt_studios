@@ -7,17 +7,14 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Rhynohunt.UI.EffectsWindow"
         Title="EffectsWindow">
-   
+
     <StackPanel>
         <TextBlock Text="Gain"></TextBlock>
         <TextBlock Text="{Binding DisplayGain}"></TextBlock>
-        <Slider Minimum="0" Maximum="12" Value="{Binding Gain }"></Slider>
+        <Slider Minimum="0" Maximum="12" Value="{Binding Gain}"></Slider>
         <TextBlock Text="Pan"></TextBlock>
         <TextBlock Text="{Binding DisplayPan}"></TextBlock>
         <Slider Minimum="-1" Maximum="1" Value="{Binding Pan}"></Slider>
-        
-        
     </StackPanel>
-    
-    
+
 </Window>
