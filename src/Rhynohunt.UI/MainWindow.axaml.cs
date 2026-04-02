@@ -210,6 +210,10 @@ public partial class MainWindow : Window
             Title = "Choose AudioClip",
             AllowMultiple = false
         });
+        if (files.Count == 0)
+        {
+            return;
+        }
         var path = files[0].Path.AbsolutePath;
         SESSION.Save(path);
     }

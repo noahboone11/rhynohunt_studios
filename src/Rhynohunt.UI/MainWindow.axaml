@@ -17,13 +17,88 @@
                 <Border Padding="10" CornerRadius="3">
                     <StackPanel Spacing="8">
                         <Image Source="{SvgImage avares://Rhynohunt.UI/Assets/Images/rhynohunt_transparent.svg}" Width="150"></Image> 
-                        <Button Content="Import" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ImportClicked"/>
-                        <Button Content="Play" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="playclicked"></Button>
-                        <Button Content="Stop" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="stopclicked" ></Button>
-                        <Button Content="Pause" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="Pauseclicked"></Button>
-                        <Button Content="Load" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="LoadClicked"></Button>
-                        <Button Content="Save" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="SaveClicked"></Button>
-                        <Button Content="Export" Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ExportClicked"></Button>
+                        
+                        <Button Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ImportClicked">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <Viewbox Width="16" Height="16">
+                                    <Path Fill="White" Data="M6 2h8l4 4v12H6zM10 6v6m0 0l-3-3m3 3l3-3">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform X="-7"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Viewbox>
+                                <TextBlock Text="Import" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button  Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="playclicked">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <Path Width="16" Height="16" Fill="White" Stretch="Uniform" Data="M8 5v14l11-7z"/>
+                                <TextBlock Text="Play" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="stopclicked">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <Viewbox Width="16" Height="16" VerticalAlignment="Center">
+                                    <Path Fill="White" Data="M6 6h12v12H6z">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform X="-6"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Viewbox>
+                                <TextBlock Text="Stop" Foreground="White"/>
+                                </StackPanel>
+                        </Button>
+                        <Button Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="Pauseclicked">
+                            <StackPanel Orientation="Horizontal" Spacing="" VerticalAlignment="Center">
+                                <Viewbox Width="16" Height="16" VerticalAlignment="Center">
+                                    <Path Fill="White" Data="M6 5h4v14H6zM14 5h4v14h-4z">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform X="-7"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Viewbox>
+                                <TextBlock Text="Pause" Foreground="White" Margin="9,0,0,0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button  Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="LoadClicked">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <Viewbox Width="16" Height="16">
+                                    <Path Fill="White"
+                                          Data="M3 6h5l2 2h9v10H3z">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform X="-7"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Viewbox>
+                                <TextBlock Text="Load" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="SaveClicked">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <Viewbox Width="16" Height="16">
+                                    <Path Fill="White" Data="M11 3v7H8l4 4 4-4h-3V3h-2zM4 17h16v2H4z">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform X="-7"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Viewbox>
+                                <TextBlock Text="Save" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Foreground="AliceBlue" HorizontalAlignment="Stretch" Click="ExportClicked">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <Viewbox Width="16" Height="16">
+                                    <Path Fill="White" Data="M11 14V7H8l4-4 4 4h-3v7h-2z">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform X="-7"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Viewbox>
+                                <TextBlock Text="Export" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
                     
                     </StackPanel>
                 </Border>
