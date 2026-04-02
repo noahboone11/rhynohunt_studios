@@ -485,4 +485,5 @@ $RECYCLE.BIN/
 
 # DocFX output folders
 _site/
+api/
 .playwright/
